@@ -109,8 +109,26 @@
             <section data-page-group="community" id="community-gallery" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">포토 갤러리</h1><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><div class="bg-white rounded-lg shadow-md overflow-hidden animate-on-scroll"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" class="w-full h-56 object-cover"><div class="p-6"><h3 class="font-bold text-lg mb-2">산학협력 프로젝트 현장</h3><p class="text-gray-600 text-sm">현대자동차그룹 연구원들과 함께 자율주행 알고리즘을 테스트하는 모습입니다.</p></div></div><div class="bg-white rounded-lg shadow-md overflow-hidden animate-on-scroll" style="transition-delay: 100ms;"><img src="https://images.unsplash.com/photo-1581092921462-682d0e794b5b?q=80&w=2070&auto=format&fit=crop" class="w-full h-56 object-cover"><div class="p-6"><h3 class="font-bold text-lg mb-2">연구실 내부 전경</h3><p class="text-gray-600 text-sm">최신 오실로스코프와 3D 프린터 등 다양한 연구 장비가 갖춰져 있습니다.</p></div></div><div class="bg-white rounded-lg shadow-md overflow-hidden animate-on-scroll" style="transition-delay: 200ms;"><img src="https://images.unsplash.com/photo-1632125952973-499427675e7b?q=80&w=2070&auto=format&fit=crop" class="w-full h-56 object-cover"><div class="p-6"><h3 class="font-bold text-lg mb-2">2024 스마트 모빌리티 경진대회</h3><p class="text-gray-600 text-sm">자체 개발한 라이다 센서 기술로 대상을 수상한 후 기념 촬영.</p></div></div></div></div></div></section>
             <section data-page-group="community" id="community-youtube" class="page-section hidden"><div class="py-20 bg-white"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">유튜브 채널</h1><div class="grid md:grid-cols-2 gap-8"><div class="bg-white rounded-lg shadow-md overflow-hidden animate-on-scroll"><div class="aspect-w-16 aspect-h-9"><iframe src="https://www.youtube.com/embed/EngW7t_J_OQ" class="w-full h-full"></iframe></div><div class="p-6"><h3 class="font-bold text-lg mb-2">자율주행 키트 언박싱</h3><p class="text-gray-600 text-sm">Autolab 키트의 구성품을 상세히 소개하고 조립 과정을 보여드립니다.</p></div></div><div class="bg-white rounded-lg shadow-md overflow-hidden animate-on-scroll" style="transition-delay: 100ms;"><div class="aspect-w-16 aspect-h-9"><iframe src="https://www.youtube.com/embed/s_6y_i32a2o" class="w-full h-full"></iframe></div><div class="p-6"><h3 class="font-bold text-lg mb-2">CAN 통신 실습</h3><p class="text-gray-600 text-sm">실제 차량에서 CAN 데이터를 추출하고 분석하는 기초 실습 영상입니다.</p></div></div></div></div></div></section>
 
-            <!-- 로그인 페이지 -->
-            <section id="login-page" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg animate-on-scroll"><h1 class="text-4xl font-bold text-navy mb-12 section-title">로그인</h1><form id="login-form"><div class="mb-4"><label for="email" class="block text-sm font-medium text-gray-700">이메일</label><input type="email" id="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div><div class="mb-6"><label for="password" class="block text-sm font-medium text-gray-700">비밀번호</label><input type="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div><div class="flex items-center mb-6"><input id="is-admin" type="checkbox" class="h-4 w-4 text-navy focus:ring-navy border-gray-300 rounded"><label for="is-admin" class="ml-2 block text-sm text-gray-900">관리자로 로그인</label></div><button type="submit" class="w-full bg-navy hover:bg-navy-dark text-white font-bold py-2 px-4 rounded-lg transition-colors">로그인</button></form></div></div></div></section>
+            <!-- 로그인/회원가입 페이지 -->
+            <section id="login-page" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg animate-on-scroll">
+                <!-- 로그인 폼 -->
+                <form id="login-form">
+                    <h1 class="text-4xl font-bold text-navy mb-12 section-title">로그인</h1>
+                    <div class="mb-4"><label for="login-email" class="block text-sm font-medium text-gray-700">이메일</label><input type="email" id="login-email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div>
+                    <div class="mb-6"><label for="login-password" class="block text-sm font-medium text-gray-700">비밀번호</label><input type="password" id="login-password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div>
+                    <button type="submit" class="w-full bg-navy hover:bg-navy-dark text-white font-bold py-2 px-4 rounded-lg transition-colors">로그인</button>
+                    <p class="text-center text-sm mt-4">아직 회원이 아니신가요? <button type="button" id="show-signup-btn" class="font-semibold text-navy hover:underline">회원가입</button></p>
+                </form>
+                <!-- 회원가입 폼 -->
+                <form id="signup-form" class="hidden">
+                    <h1 class="text-4xl font-bold text-navy mb-12 section-title">회원가입</h1>
+                    <div class="mb-4"><label for="signup-email" class="block text-sm font-medium text-gray-700">이메일</label><input type="email" id="signup-email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div>
+                    <div class="mb-4"><label for="signup-password" class="block text-sm font-medium text-gray-700">비밀번호</label><input type="password" id="signup-password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div>
+                    <div class="mb-6"><label for="signup-password-confirm" class="block text-sm font-medium text-gray-700">비밀번호 확인</label><input type="password" id="signup-password-confirm" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div>
+                    <button type="submit" class="w-full bg-navy hover:bg-navy-dark text-white font-bold py-2 px-4 rounded-lg transition-colors">회원가입</button>
+                    <p class="text-center text-sm mt-4">이미 회원이신가요? <button type="button" id="show-login-btn" class="font-semibold text-navy hover:underline">로그인</button></p>
+                </form>
+            </div></div></div></section>
 
             <!-- 장바구니 페이지 -->
             <section id="cart-page" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">장바구니</h1><div id="cart-items-container" class="mt-12 max-w-4xl mx-auto animate-on-scroll"></div></div></div></section>
@@ -213,21 +231,35 @@
 
             // --- Cart Logic ---
             function addToCart(productId) {
+                const user = auth.currentUser;
+                if (!user) {
+                    alert("장바구니 기능은 로그인이 필요합니다.");
+                    showPage('#login-page');
+                    return;
+                }
                 const product = products.find(p => p.id === productId);
                 if (product) {
-                    const cartItem = cart.find(item => item.id === productId);
-                    if (cartItem) {
-                        cartItem.quantity++;
-                    } else {
-                        cart.push({ ...product, quantity: 1 });
-                    }
-                    updateCart();
-                    showCartModal(product.name);
+                    const cartRef = db.collection('users').doc(user.uid).collection('cart').doc(productId);
+                    db.runTransaction((transaction) => {
+                        return transaction.get(cartRef).then((doc) => {
+                            let newQuantity = 1;
+                            if (doc.exists) {
+                                newQuantity = doc.data().quantity + 1;
+                            }
+                            transaction.set(cartRef, { ...product, quantity: newQuantity });
+                        });
+                    }).then(() => {
+                        showCartModal(product.name);
+                        fetchCart(); // Firestore에서 장바구니 다시 불러오기
+                    });
                 }
             }
             function removeFromCart(productId) {
-                cart = cart.filter(item => item.id !== productId);
-                updateCart();
+                const user = auth.currentUser;
+                if (!user) return;
+                db.collection('users').doc(user.uid).collection('cart').doc(productId).delete().then(() => {
+                    fetchCart();
+                });
             }
             function updateCart() {
                 if(cartItemsPageContainer) {
@@ -283,17 +315,41 @@
             
             document.getElementById('login-form').addEventListener('submit', function(e) {
                 e.preventDefault();
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
                 auth.signInWithEmailAndPassword(email, password)
                     .catch((error) => alert("로그인 실패: " + error.message));
+            });
+            
+            document.getElementById('signup-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                const passwordConfirm = document.getElementById('signup-password-confirm').value;
+                if (password !== passwordConfirm) {
+                    alert("비밀번호가 일치하지 않습니다.");
+                    return;
+                }
+                auth.createUserWithEmailAndPassword(email, password)
+                    .catch((error) => alert("회원가입 실패: " + error.message));
             });
 
             document.getElementById('go-to-cart-btn').addEventListener('click', () => {
                 closeCartModal();
                 showPage('#cart-page');
             });
+            
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            document.getElementById('show-signup-btn').addEventListener('click', () => {
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+            });
+            document.getElementById('show-login-btn').addEventListener('click', () => {
+                signupForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+            });
+
 
             // --- Slider Controls ---
             const swiper = new Swiper('.swiper', { loop: true, autoplay: { delay: 5000, disableOnInteraction: false }, pagination: { el: '.swiper-pagination', clickable: true } });
@@ -334,13 +390,15 @@
             };
 
             const showNoticeDetail = (noticeId) => {
-                const notice = notices.find(n => n.id === noticeId);
-                if(notice) {
-                    document.getElementById('notice-detail-title').textContent = notice.title;
-                    document.getElementById('notice-detail-date').textContent = notice.date;
-                    document.getElementById('notice-detail-content').innerHTML = notice.content;
-                    showPage('#community-notice-detail');
-                }
+                db.collection('notices').doc(noticeId).get().then(doc => {
+                    if (doc.exists) {
+                        const notice = doc.data();
+                        document.getElementById('notice-detail-title').textContent = notice.title;
+                        document.getElementById('notice-detail-date').textContent = notice.date;
+                        document.getElementById('notice-detail-content').innerHTML = notice.content;
+                        showPage('#community-notice-detail');
+                    }
+                });
             };
             
             navButtons.forEach(button => {
@@ -391,18 +449,33 @@
             // --- Firebase Auth State Listener ---
             auth.onAuthStateChanged(user => {
                 if (user) {
-                    const isAdminCheckbox = document.getElementById('is-admin');
-                    const isAdmin = isAdminCheckbox ? isAdminCheckbox.checked : false;
+                    // 실제 서비스에서는 Firestore나 Custom Claims로 관리자 확인
+                    const isAdmin = user.email === 'admin@autolab.com'; // 예시 관리자 계정
                     loggedInUser = isAdmin ? 'admin' : 'member';
-                    alert('로그인되었습니다.');
-                    showPage(isAdmin ? '#admin-page' : '#home');
+                    if (!document.querySelector(location.hash)) {
+                        showPage(isAdmin ? '#admin-page' : '#home');
+                    }
+                    fetchCart();
                 } else {
                     loggedInUser = null;
+                    cart = [];
+                    updateCart();
                 }
                 updateLoginStatus();
             });
 
             // --- Initial Data Fetch ---
+            async function fetchCart() {
+                const user = auth.currentUser;
+                if (!user) return;
+                const querySnapshot = await db.collection('users').doc(user.uid).collection('cart').get();
+                cart = [];
+                querySnapshot.forEach(doc => {
+                    cart.push({ id: doc.id, ...doc.data() });
+                });
+                updateCart();
+            }
+
             function fetchData() {
                 db.collection("products").get().then((querySnapshot) => {
                     products = [];
@@ -412,7 +485,7 @@
                     renderProducts();
                 }).catch(error => console.error("Error fetching products: ", error));
 
-                db.collection("notices").get().then((querySnapshot) => {
+                db.collection("notices").orderBy("date", "desc").get().then((querySnapshot) => {
                     notices = [];
                     querySnapshot.forEach((doc) => {
                         notices.push({ id: doc.id, ...doc.data() });
@@ -422,8 +495,6 @@
             }
 
             fetchData();
-            updateCart();
-            updateLoginStatus();
         });
     </script>
 
