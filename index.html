@@ -186,7 +186,7 @@
             let products = [];
             let notices = [];
             let cart = [];
-            let loggedInUser = null; // null, 'member', 'admin'
+            let currentUserState = null; // null, 'member', 'admin'
 
             // --- UI Elements ---
             const productListContainer = document.getElementById('product-list');
@@ -279,9 +279,9 @@
             function updateLoginStatus() {
                 const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
                 const cartBadgeHtml = `<span id="cart-badge" class="cart-badge ${totalItems > 0 ? '' : 'hidden'}">${totalItems}</span>`;
-                if (loggedInUser === 'admin') {
+                if (currentUserState === 'admin') {
                     userMenu.innerHTML = `<a href="#admin-page" class="font-semibold text-navy nav-link">관리자 페이지</a><button id="logout-button" class="text-gray-600 hover:text-navy">로그아웃</button>`;
-                } else if (loggedInUser === 'member') {
+                } else if (currentUserState === 'member') {
                      userMenu.innerHTML = `<span class="font-semibold">환영합니다!</span><a href="#cart-page" class="text-gray-600 hover:text-navy relative nav-link"><i class="fa-solid fa-cart-shopping text-xl"></i>${cartBadgeHtml}</a><button id="logout-button" class="text-gray-600 hover:text-navy">로그아웃</button>`;
                 } else {
                     userMenu.innerHTML = `<a href="#login-page" class="text-gray-600 hover:text-navy nav-link"><i class="fa-solid fa-user text-xl"></i></a><a href="#cart-page" class="text-gray-600 hover:text-navy relative nav-link"><i class="fa-solid fa-cart-shopping text-xl"></i>${cartBadgeHtml}</a>`;
@@ -318,6 +318,10 @@
                 const email = document.getElementById('login-email').value;
                 const password = document.getElementById('login-password').value;
                 auth.signInWithEmailAndPassword(email, password)
+                    .then(() => {
+                        alert("로그인되었습니다.");
+                        // onAuthStateChanged will handle the rest
+                    })
                     .catch((error) => alert("로그인 실패: " + error.message));
             });
             
@@ -331,6 +335,10 @@
                     return;
                 }
                 auth.createUserWithEmailAndPassword(email, password)
+                    .then(() => {
+                        alert("회원가입에 성공했습니다. 자동으로 로그인됩니다.");
+                        // onAuthStateChanged will handle the rest
+                    })
                     .catch((error) => alert("회원가입 실패: " + error.message));
             });
 
@@ -448,18 +456,21 @@
             
             // --- Firebase Auth State Listener ---
             auth.onAuthStateChanged(user => {
+                const wasLoggedIn = !!currentUserState;
                 if (user) {
-                    // 실제 서비스에서는 Firestore나 Custom Claims로 관리자 확인
-                    const isAdmin = user.email === 'admin@autolab.com'; // 예시 관리자 계정
-                    loggedInUser = isAdmin ? 'admin' : 'member';
-                    alert('로그인되었습니다.');
-                    showPage(isAdmin ? '#admin-page' : '#home');
+                    const isAdmin = user.email === 'admin@autolab.com';
+                    currentUserState = isAdmin ? 'admin' : 'member';
+                    
+                    if (!wasLoggedIn) { // 방금 로그인/회원가입 한 경우
+                        showPage(isAdmin ? '#admin-page' : '#home');
+                    }
                     fetchCart();
                 } else {
-                    if (loggedInUser) { // Only show alert if a user was previously logged in
+                    if (wasLoggedIn) { // 방금 로그아웃 한 경우
                         alert('로그아웃 되었습니다.');
+                        showPage('#home');
                     }
-                    loggedInUser = null;
+                    currentUserState = null;
                     cart = [];
                     updateCart();
                 }
