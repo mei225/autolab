@@ -311,6 +311,7 @@
                  if (e.target.closest('#logout-button')) {
                     auth.signOut().then(() => {
                         alert('로그아웃 되었습니다.');
+                        showPage('#home');
                     });
                 }
             });
@@ -321,9 +322,8 @@
                 const password = document.getElementById('login-password').value;
                 auth.signInWithEmailAndPassword(email, password)
                     .then((userCredential) => {
-                        const isAdmin = userCredential.user.email === 'admin@autolab.com';
                         alert("로그인되었습니다.");
-                        showPage(isAdmin ? '#admin-page' : '#home');
+                        // onAuthStateChanged will handle page navigation and UI updates
                     })
                     .catch((error) => alert("로그인 실패: " + error.message));
             });
