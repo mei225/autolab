@@ -1,0 +1,193 @@
+{\rtf1\ansi\ansicpg949\cocoartf2818
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="ko">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>Autolab - Innovative Automotive Solutions</title>\
+    <script src="https://cdn.tailwindcss.com"></script>\
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>\
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">\
+    <style>\
+        body \{\
+            font-family: 'Noto Sans KR', sans-serif;\
+        \}\
+        /* \uc0\u45348 \u51060 \u48708  \u49353 \u49345  \u52964 \u49828 \u53568  */\
+        .bg-navy \{ background-color: #1E3A8A; \}\
+        .text-navy \{ color: #1E3A8A; \}\
+        .border-navy \{ border-color: #1E3A8A; \}\
+        .hover\\:bg-navy-dark:hover \{ background-color: #1C317A; \}\
+\
+        /* \uc0\u45348 \u48708 \u44172 \u51060 \u49496  \u46300 \u47213 \u45796 \u50868  */\
+        .dropdown:hover .dropdown-menu \{\
+            display: block;\
+        \}\
+        \
+        /* Swiper.js \uc0\u49836 \u46972 \u51060 \u45908  \u49828 \u53440 \u51068  */\
+        .swiper-slide .overlay \{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1; \}\
+        .swiper-slide .slide-content \{ position: relative; z-index: 2; \}\
+        .swiper-slide video \{ position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 0; \}\
+        .swiper-pagination-bullet-active \{ background-color: #fff !important; \}\
+\
+        .section-title \{ @apply text-3xl font-bold text-center; \}\
+        .section-title::after \{ content: ''; display: block; width: 50px; height: 3px; background-color: #1E3A8A; margin: 16px auto 0; \}\
+        \
+        .timeline-item \{ border-left: 3px solid #1E3A8A; \}\
+\
+        /* \uc0\u49436 \u48652 \u45348 \u48708 \u44172 \u51060 \u49496  \u53485  \u49828 \u53440 \u51068  */\
+        .sub-nav-tab \{ @apply px-4 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent hover:text-navy hover:border-navy transition-all; \}\
+        .sub-nav-tab.active \{ @apply text-navy border-navy; \}\
+    </style>\
+</head>\
+<body class="bg-gray-100 text-gray-800">\
+\
+    <!-- Header & Navigation -->\
+    <header class="bg-white shadow-md sticky top-0 z-50">\
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">\
+            <a href="#home" class="text-3xl font-bold text-navy nav-link">Autolab</a>\
+            <div class="hidden md:flex items-center space-x-8">\
+                <div class="dropdown relative">\
+                    <button class="font-semibold text-gray-700 hover:text-navy transition-colors nav-button" data-target="#about-intro">\uc0\u54924 \u49324 \u49548 \u44060 </button>\
+                    <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40">\
+                        <a href="#about-intro" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">\uc0\u50724 \u53664 \u47017 \u49548 \u44060 </a>\
+                        <a href="#about-history" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">\uc0\u49324 \u50629 \u50672 \u54785 </a>\
+                        <a href="#about-location" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">\uc0\u50724 \u49884 \u45716  \u44600 </a>\
+                    </div>\
+                </div>\
+                <div class="dropdown relative">\
+                    <button class="font-semibold text-gray-700 hover:text-navy transition-colors nav-button" data-target="#product-rd">\uc0\u51228 \u54408 \u49548 \u44060 </button>\
+                    <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40">\
+                        <a href="#product-rd" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">R&D\uc0\u44368 \u50977 </a>\
+                        <a href="#product-auto" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">\uc0\u51088 \u46041 \u52264 \u44368 \u50977 </a>\
+                        <a href="#product-purchase" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">\uc0\u51228 \u54408 \u44396 \u51077 </a>\
+                    </div>\
+                </div>\
+                <a href="#quote" class="font-semibold text-gray-700 hover:text-navy transition-colors nav-link">\uc0\u44204 \u51201  \u48143  \u51228 \u55092 \u47928 \u51032 </a>\
+                <div class="dropdown relative">\
+                    <button class="font-semibold text-gray-700 hover:text-navy transition-colors nav-button" data-target="#community-notices">\uc0\u52964 \u48036 \u45768 \u54000 </button>\
+                    <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40">\
+                        <a href="#community-notices" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">\uc0\u44277 \u51648 \u49324 \u54637 </a>\
+                        <a href="#community-gallery" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">\uc0\u54252 \u53664  \u44068 \u47084 \u47532 </a>\
+                        <a href="#community-youtube" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">\uc0\u50976 \u53916 \u48652  \u52292 \u45328 </a>\
+                    </div>\
+                </div>\
+            </div>\
+            <div class="md:hidden"><button id="mobile-menu-button" class="text-gray-800 focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button></div>\
+        </nav>\
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t"><a href="#about-intro" class="block py-2 px-4 text-sm hover:bg-gray-100 nav-link">\uc0\u50724 \u53664 \u47017 \u49548 \u44060 </a><a href="#about-history" class="block py-2 px-4 text-sm hover:bg-gray-100 nav-link">\u49324 \u50629 \u50672 \u54785 </a><a href="#product-rd" class="block py-2 px-4 text-sm hover:bg-gray-100 nav-link">R&D\u44368 \u50977 </a><a href="#quote" class="block py-2 px-4 text-sm hover:bg-gray-100 nav-link">\u44204 \u51201  \u48143  \u51228 \u55092 \u47928 \u51032 </a><a href="#community-notices" class="block py-2 px-4 text-sm hover:bg-gray-100 nav-link">\u44277 \u51648 \u49324 \u54637 </a><a href="#community-gallery" class="block py-2 px-4 text-sm hover:bg-gray-100 nav-link">\u54252 \u53664  \u44068 \u47084 \u47532 </a></div>\
+    </header>\
+\
+    <main>\
+        <!-- Home Section (Hero Slider) -->\
+        <section id="home" class="h-screen w-full main-content">\
+            <div class="swiper h-full">\
+                <div class="swiper-wrapper">\
+                    <div class="swiper-slide flex items-center justify-center text-white text-center"><div class="overlay"></div><video src="https://videos.pexels.com/video-files/8044879/8044879-hd_1920_1080_25fps.mp4" autoplay loop muted playsinline></video><div class="slide-content container mx-auto px-6"><h1 class="text-4xl md:text-6xl font-bold mb-4">\uc0\u48120 \u47000 \u47484  \u51452 \u46020 \u54616 \u45716  \u44592 \u49696 , Autolab</h1><p class="text-lg md:text-xl max-w-3xl mx-auto">\u54785 \u49888 \u51201 \u51064  \u49468 \u49436  \u44592 \u49696 \u44284  \u52404 \u44228 \u51201 \u51064  \u44368 \u50977 \u51004 \u47196  \u51088 \u46041 \u52264  \u49328 \u50629 \u51032  \u45236 \u51068 \u51012  \u47564 \u46308 \u50612 \u44049 \u45768 \u45796 .</p></div></div>\
+                    <div class="swiper-slide flex items-center justify-center text-white text-center"><div class="overlay"></div><video src="https://videos.pexels.com/video-files/5944249/5944249-hd_1920_1080_24fps.mp4" autoplay loop muted playsinline></video><div class="slide-content container mx-auto px-6"><h1 class="text-4xl md:text-6xl font-bold mb-4">\uc0\u54632 \u44760  \u49457 \u51109 \u54616 \u45716  R&D \u54028 \u53944 \u45320 </h1><p class="text-lg md:text-xl max-w-3xl mx-auto">\u49892 \u47924  \u51473 \u49900 \u51032  \u44368 \u50977  \u54532 \u47196 \u44536 \u47016 \u51012  \u53685 \u54644  \u52572 \u44256 \u51032  \u51204 \u47928 \u44032 \u47484  \u50577 \u49457 \u54633 \u45768 \u45796 .</p></div></div>\
+                </div>\
+                <div class="swiper-pagination"></div>\
+            </div>\
+        </section>\
+\
+        <!-- Community Preview Section -->\
+        <section id="community-preview" class="py-20 bg-white main-content">\
+            <div class="container mx-auto px-6"><h2 class="section-title">\uc0\u52964 \u48036 \u45768 \u54000 </h2><div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8"><div class="bg-gray-50 p-6 rounded-lg shadow"><h3 class="text-xl font-bold text-navy mb-4">\u44277 \u51648 \u49324 \u54637 </h3><ul class="space-y-3"><li class="flex justify-between items-center text-sm"><a href="#community-notices" class="hover:underline truncate nav-link">2025\u45380  \u54616 \u48152 \u44592  R&D \u44368 \u50977 \u49373  \u47784 \u51665 </a><span class="text-gray-500 flex-shrink-0 ml-4">2025.07.11</span></li><li class="flex justify-between items-center text-sm"><a href="#community-notices" class="hover:underline truncate nav-link">\u51088 \u50984 \u51452 \u54665  \u49468 \u49436  \u44592 \u49696  \u49464 \u48120 \u45208  \u50504 \u45236 </a><span class="text-gray-500 flex-shrink-0 ml-4">2025.07.05</span></li><li class="flex justify-between items-center text-sm"><a href="#community-notices" class="hover:underline truncate nav-link">\u54856 \u54168 \u51060 \u51648  \u47532 \u45684 \u50620  \u50724 \u54536 </a><span class="text-gray-500 flex-shrink-0 ml-4">2025.07.01</span></li></ul></div><div class="bg-gray-50 p-6 rounded-lg shadow"><h3 class="text-xl font-bold text-navy mb-4">\u54252 \u53664  \u44068 \u47084 \u47532 </h3><div class="grid grid-cols-3 gap-2"><a href="#community-gallery" class="nav-link"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="\u44068 \u47084 \u47532  \u51060 \u48120 \u51648  1" class="rounded aspect-square object-cover"></a><a href="#community-gallery" class="nav-link"><img src="https://images.unsplash.com/photo-1581092921462-682d0e794b5b?q=80&w=2070&auto=format&fit=crop" alt="\u44068 \u47084 \u47532  \u51060 \u48120 \u51648  2" class="rounded aspect-square object-cover"></a><a href="#community-gallery" class="nav-link"><img src="https://images.unsplash.com/photo-1632125952973-499427675e7b?q=80&w=2070&auto=format&fit=crop" alt="\u44068 \u47084 \u47532  \u51060 \u48120 \u51648  3" class="rounded aspect-square object-cover"></a></div></div><div class="bg-gray-50 p-6 rounded-lg shadow"><h3 class="text-xl font-bold text-navy mb-4">\u50976 \u53916 \u48652  \u52292 \u45328 </h3><div class="aspect-w-16 aspect-h-9"><iframe src="https://www.youtube.com/embed/EngW7t_J_OQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="rounded-lg"></iframe></div></div></div></div>\
+        </section>\
+        \
+        <!-- \uc0\u49345 \u49464  \u54168 \u51060 \u51648  \u49465 \u49496  \u52968 \u53580 \u51060 \u45320  -->\
+        <div id="page-content-wrapper">\
+            <!-- \uc0\u54924 \u49324 \u49548 \u44060  -->\
+            <section data-page-group="about" id="about-intro" class="page-section py-20 hidden"><div class="container mx-auto px-6"><div class="flex justify-center border-b mb-12"><div class="sub-nav" data-group="about"><a href="#about-intro" class="sub-nav-tab nav-link">\uc0\u50724 \u53664 \u47017 \u49548 \u44060 </a><a href="#about-history" class="sub-nav-tab nav-link">\u49324 \u50629 \u50672 \u54785 </a><a href="#about-location" class="sub-nav-tab nav-link">\u50724 \u49884 \u45716  \u44600 </a></div></div><h2 class="section-title">\u50724 \u53664 \u47017 \u49548 \u44060 </h2><div class="mt-12 text-center max-w-4xl mx-auto"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-lg mx-auto mb-8"><p class="text-lg leading-relaxed">Autolab\u51008  \u44592 \u51316 \u51032  \u53952 \u51012  \u44648 \u45716  \u54785 \u49888 \u51201 \u51064  \u49468 \u49436  \u54540 \u47019 \u54268 \u51012  \u44060 \u48156 \u54616 \u44256 , \u49464 \u49345 \u50640  \u50630 \u45912  \u49352 \u47196 \u50868  \u49468 \u49436 \u47484  \u50672 \u44396 \u54633 \u45768 \u45796 .<br>\u51200 \u55148 \u45716  \u49892 \u49845  \u44592 \u48152  \u54617 \u49845 \u51012  \u53685 \u54644  \u54617 \u49373 \u46308 \u51060  \u45733 \u46041 \u51201 \u51004 \u47196  \u51648 \u49885 \u51012  \u49845 \u46301 \u54616 \u44256  \u47928 \u51228 \u47484  \u54644 \u44208 \u54616 \u45716  \u45733 \u47141 \u51012  \u44592 \u47484  \u49688  \u51080 \u46020 \u47197  \u51648 \u50896 \u54633 \u45768 \u45796 .<br>\u51060 \u45716  \u44592 \u51316  \u51088 \u46041 \u52264  \u44368 \u50977 \u50640  \u50630 \u50632 \u45912  \u49352 \u47196 \u50868  \u49884 \u46020 \u51060 \u47728 , Autolab\u51032  \u54645 \u49900 \u51201 \u51064  \u44368 \u50977  \u52384 \u54617 \u51077 \u45768 \u45796 .</p></div></div></section>\
+            <section data-page-group="about" id="about-history" class="page-section py-20 bg-white hidden"><div class="container mx-auto px-6"><div class="flex justify-center border-b mb-12"><div class="sub-nav" data-group="about"><a href="#about-intro" class="sub-nav-tab nav-link">\uc0\u50724 \u53664 \u47017 \u49548 \u44060 </a><a href="#about-history" class="sub-nav-tab nav-link">\u49324 \u50629 \u50672 \u54785 </a><a href="#about-location" class="sub-nav-tab nav-link">\u50724 \u49884 \u45716  \u44600 </a></div></div><h2 class="section-title">\u49324 \u50629 \u50672 \u54785 </h2><div class="mt-12 max-w-2xl mx-auto"><div class="relative"><div class="timeline-item pl-8 pb-8"><p class="font-bold text-navy">2025. 07</p><p>Autolab \u54856 \u54168 \u51060 \u51648  \u47532 \u45684 \u50620 </p></div><div class="timeline-item pl-8 pb-8"><p class="font-bold text-navy">2024. 11</p><p>\u54788 \u45824 \u51088 \u46041 \u52264 \u44536 \u47353  \u49328 \u54617 \u54801 \u47141  \u52404 \u44208 </p></div><div class="timeline-item pl-8 pb-8"><p class="font-bold text-navy">2024. 05</p><p>\u49828 \u47560 \u53944  \u47784 \u48716 \u47532 \u54000  \u44221 \u51652 \u45824 \u54924  \u45824 \u49345  \u49688 \u49345 </p></div><div class="timeline-item pl-8 pb-8"><p class="font-bold text-navy">2023. 03</p><p>Autolab \u50672 \u44396 \u49548  \u49444 \u47549 </p></div></div></div></div></section>\
+            <section data-page-group="about" id="about-location" class="page-section py-20 hidden"><div class="container mx-auto px-6"><div class="flex justify-center border-b mb-12"><div class="sub-nav" data-group="about"><a href="#about-intro" class="sub-nav-tab nav-link">\uc0\u50724 \u53664 \u47017 \u49548 \u44060 </a><a href="#about-history" class="sub-nav-tab nav-link">\u49324 \u50629 \u50672 \u54785 </a><a href="#about-location" class="sub-nav-tab nav-link">\u50724 \u49884 \u45716  \u44600 </a></div></div><h2 class="section-title">\u50724 \u49884 \u45716  \u44600 </h2><div class="mt-12 grid md:grid-cols-2 gap-8 items-center"><div class="h-96"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3264.331899142857!2d128.5482356763493!3d35.19864245649987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x356f32841440253d%3A0x1f234fe91b32d18c!2z6rK964Ko64yA7ZWZ6rWQ!5e0!3m2!1sko!2skr!4v1720661704604!5m2!1sko!2skr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-lg shadow-md"></iframe></div><div class="text-center md:text-left"><p class="font-bold text-lg">\u51452 \u49548 </p><p class="mb-4">\u44221 \u49345 \u45224 \u46020  \u52285 \u50896 \u49884  \u47560 \u49328 \u54633 \u54252 \u44396  \u44221 \u45224 \u45824 \u54617 \u47196  7, 1\u44277 \u54617 \u44288  4\u52789 </p><p class="font-bold text-lg">\u50672 \u46973 \u52376 </p><p class="mb-4">T. 055-123-4567 / F. 055-123-4568</p><p class="font-bold text-lg">\u51060 \u47700 \u51068 </p><p>contact@autolab.co.kr</p></div></div></div></section>\
+            \
+            <!-- \uc0\u51228 \u54408 \u49548 \u44060  -->\
+            <section data-page-group="product" id="product-rd" class="page-section py-20 bg-white hidden"><div class="container mx-auto px-6"><div class="flex justify-center border-b mb-12"><div class="sub-nav" data-group="product"><a href="#product-rd" class="sub-nav-tab nav-link">R&D\uc0\u44368 \u50977 </a><a href="#product-auto" class="sub-nav-tab nav-link">\u51088 \u46041 \u52264 \u44368 \u50977 </a><a href="#product-purchase" class="sub-nav-tab nav-link">\u51228 \u54408 \u44396 \u51077 </a></div></div><h2 class="section-title">R&D\u44368 \u50977 </h2><div class="mt-12 grid md:grid-cols-2 gap-8 items-center"><div class="pr-8"><h3 class="text-2xl font-bold mb-4 text-navy">\u49892 \u47924  \u51473 \u49900 \u51032  R&D \u51204 \u47928 \u44032  \u50577 \u49457 </h3><p class="leading-relaxed">Autolab\u51032  R&D \u44368 \u50977 \u51008  \u45800 \u49692 \u54620  \u51060 \u47200  \u54617 \u49845 \u51012  \u45336 \u50612 , \u49892 \u51228  \u49328 \u50629  \u54788 \u51109 \u50640 \u49436  \u47560 \u51452 \u54624  \u47928 \u51228 \u46308 \u51012  \u51649 \u51217  \u54644 \u44208 \u54616 \u45716  \u54532 \u47196 \u51229 \u53944  \u44592 \u48152 \u51004 \u47196  \u51652 \u54665 \u46121 \u45768 \u45796 . \u54617 \u49373 \u46308 \u51008  \u52572 \u49888  \u49468 \u49436  \u44592 \u49696 \u51012  \u54876 \u50857 \u54616 \u50668  \u51088 \u49888 \u47564 \u51032  \u50500 \u51060 \u46356 \u50612 \u47484  \u44396 \u52404 \u54868 \u54616 \u44256 , \u49884 \u51228 \u54408 \u51012  \u51228 \u51089 \u54616 \u47728  \u49892 \u51204  \u44221 \u54744 \u51012  \u49939 \u49845 \u45768 \u45796 .</p></div><div><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-lg"></div></div></div></section>\
+            <section data-page-group="product" id="product-auto" class="page-section py-20 hidden"><div class="container mx-auto px-6"><div class="flex justify-center border-b mb-12"><div class="sub-nav" data-group="product"><a href="#product-rd" class="sub-nav-tab nav-link">R&D\uc0\u44368 \u50977 </a><a href="#product-auto" class="sub-nav-tab nav-link">\u51088 \u46041 \u52264 \u44368 \u50977 </a><a href="#product-purchase" class="sub-nav-tab nav-link">\u51228 \u54408 \u44396 \u51077 </a></div></div><h2 class="section-title">\u51088 \u46041 \u52264 \u44368 \u50977 </h2><div class="mt-12 grid md:grid-cols-2 gap-8 items-center"><div class="order-2 md:order-1"><img src="https://images.unsplash.com/photo-1617855023909-b003c4ea2402?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-lg"></div><div class="order-1 md:order-2 pl-8"><h3 class="text-2xl font-bold mb-4 text-navy">\u48120 \u47000  \u51088 \u46041 \u52264  \u49328 \u50629 \u51012  \u50948 \u54620  \u47582 \u52644  \u44368 \u50977 </h3><p class="leading-relaxed">\u51088 \u50984 \u51452 \u54665 , \u51204 \u44592 \u52264 , \u52964 \u45349 \u54000 \u46300 \u52852  \u46321  \u44553 \u48320 \u54616 \u45716  \u51088 \u46041 \u52264  \u49328 \u50629 \u51032  \u53944 \u47116 \u46300 \u50640  \u47582 \u52656  \u53945 \u54868 \u46108  \u44368 \u50977  \u44284 \u51221 \u51012  \u51228 \u44277 \u54633 \u45768 \u45796 . CAN \u53685 \u49888 , LiDAR/Radar \u49468 \u49436  \u45936 \u51060 \u53552  \u52376 \u47532 , \u51076 \u48288 \u46356 \u46300  \u49884 \u49828 \u53596  \u49444 \u44228  \u46321  \u54645 \u49900  \u44592 \u49696 \u51012  \u44618 \u51060  \u51080 \u44172  \u45796 \u47336 \u50612  \u52264 \u49464 \u45824  \u51088 \u46041 \u52264  \u51204 \u47928 \u44032 \u47484  \u50577 \u49457 \u54633 \u45768 \u45796 .</p></div></div></div></section>\
+            <section data-page-group="product" id="product-purchase" class="page-section py-20 bg-white hidden"><div class="container mx-auto px-6"><div class="flex justify-center border-b mb-12"><div class="sub-nav" data-group="product"><a href="#product-rd" class="sub-nav-tab nav-link">R&D\uc0\u44368 \u50977 </a><a href="#product-auto" class="sub-nav-tab nav-link">\u51088 \u46041 \u52264 \u44368 \u50977 </a><a href="#product-purchase" class="sub-nav-tab nav-link">\u51228 \u54408 \u44396 \u51077 </a></div></div><h2 class="section-title">\u51228 \u54408 \u44396 \u51077 </h2><p class="text-center mt-4 text-gray-600">Autolab\u50640 \u49436  \u51088 \u52404  \u44060 \u48156 \u54620  \u44368 \u50977 \u50857  \u53412 \u53944  \u48143  \u49468 \u49436  \u47784 \u46280 \u51077 \u45768 \u45796 .</p><div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-8"><div class="border rounded-lg p-6 text-center shadow hover:shadow-xl transition-shadow"><h3 class="text-xl font-bold text-navy">\u51088 \u50984 \u51452 \u54665  \u44368 \u50977  \u53412 \u53944 </h3><p class="mt-2 text-gray-600">\u52852 \u47700 \u46972 , LiDAR, \u44033 \u51333  \u49468 \u49436 \u44032  \u54252 \u54632 \u46108  \u50732 \u51064 \u50896  \u53412 \u53944 </p><p class="mt-4 text-2xl font-bold">\u8361 1,200,000</p></div><div class="border rounded-lg p-6 text-center shadow hover:shadow-xl transition-shadow"><h3 class="text-xl font-bold text-navy">CAN \u53685 \u49888  \u48516 \u49437  \u47784 \u46280 </h3><p class="mt-2 text-gray-600">\u52264 \u47049  \u45936 \u51060 \u53552  \u48516 \u49437  \u48143  \u51228 \u50612 \u47484  \u50948 \u54620  \u54596 \u49688  \u47784 \u46280 </p><p class="mt-4 text-2xl font-bold">\u8361 350,000</p></div><div class="border rounded-lg p-6 text-center shadow hover:shadow-xl transition-shadow"><h3 class="text-xl font-bold text-navy">\u52488 \u51020 \u54028  \u49468 \u49436  \u50612 \u47112 \u51060 </h3><p class="mt-2 text-gray-600">\u51221 \u48128 \u54620  \u51109 \u50528 \u47932  \u44048 \u51648 \u47484  \u50948 \u54620  8\u52292 \u45328  \u49468 \u49436  \u50612 \u47112 \u51060 </p><p class="mt-4 text-2xl font-bold">\u8361 150,000</p></div></div></div></section>\
+            \
+            <!-- \uc0\u44204 \u51201  \u48143  \u51228 \u55092 \u47928 \u51032  -->\
+            <section id="quote" class="page-section py-20 hidden"><div class="container mx-auto px-6"><h2 class="section-title">\uc0\u44204 \u51201  \u48143  \u51228 \u55092 \u47928 \u51032 </h2><div class="mt-12 max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg"><form><div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"><input type="text" placeholder="\u51060 \u47492 " class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-navy"><input type="text" placeholder="\u54924 \u49324 \u47749 " class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-navy"></div><div class="mb-6"><input type="email" placeholder="\u51060 \u47700 \u51068 " class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-navy"></div><div class="mb-6"><textarea placeholder="\u47928 \u51032  \u45236 \u50857 " rows="5" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-navy"></textarea></div><button type="submit" class="w-full bg-navy hover:bg-navy-dark text-white font-bold py-3 px-4 rounded-lg transition-colors">\u47928 \u51032 \u54616 \u44592 </button></form></div></div></section>\
+            \
+            <!-- \uc0\u52964 \u48036 \u45768 \u54000  -->\
+            <section data-page-group="community" id="community-notices" class="page-section py-20 bg-white hidden"><div class="container mx-auto px-6"><div class="flex justify-center border-b mb-12"><div class="sub-nav" data-group="community"><a href="#community-notices" class="sub-nav-tab nav-link">\uc0\u44277 \u51648 \u49324 \u54637 </a><a href="#community-gallery" class="sub-nav-tab nav-link">\u54252 \u53664  \u44068 \u47084 \u47532 </a><a href="#community-youtube" class="sub-nav-tab nav-link">\u50976 \u53916 \u48652  \u52292 \u45328 </a></div></div><h2 class="section-title">\u44277 \u51648 \u49324 \u54637 </h2><div class="mt-12 max-w-4xl mx-auto"><div class="border-t"><div class="border-b p-4 grid grid-cols-1 md:grid-cols-4 gap-4 hover:bg-gray-50"><span class="font-bold text-navy">\u44277 \u51648 </span><p class="md:col-span-2">2025\u45380  \u54616 \u48152 \u44592  R&D \u44368 \u50977 \u49373  \u47784 \u51665 </p><span class="text-gray-500 text-right">2025-07-11</span></div><div class="border-b p-4 grid grid-cols-1 md:grid-cols-4 gap-4 hover:bg-gray-50"><span class="font-bold text-navy">\u44277 \u51648 </span><p class="md:col-span-2">\u51088 \u50984 \u51452 \u54665  \u49468 \u49436  \u44592 \u49696  \u49464 \u48120 \u45208  \u50504 \u45236 </p><span class="text-gray-500 text-right">2025-07-05</span></div><div class="border-b p-4 grid grid-cols-1 md:grid-cols-4 gap-4 hover:bg-gray-50"><span class="font-bold text-navy">\u44277 \u51648 </span><p class="md:col-span-2">\u54856 \u54168 \u51060 \u51648  \u47532 \u45684 \u50620  \u50724 \u54536 </p><span class="text-gray-500 text-right">2025-07-01</span></div></div></div></div></section>\
+            <section data-page-group="community" id="community-gallery" class="page-section py-20 hidden"><div class="container mx-auto px-6"><div class="flex justify-center border-b mb-12"><div class="sub-nav" data-group="community"><a href="#community-notices" class="sub-nav-tab nav-link">\uc0\u44277 \u51648 \u49324 \u54637 </a><a href="#community-gallery" class="sub-nav-tab nav-link">\u54252 \u53664  \u44068 \u47084 \u47532 </a><a href="#community-youtube" class="sub-nav-tab nav-link">\u50976 \u53916 \u48652  \u52292 \u45328 </a></div></div><h2 class="section-title">\u54252 \u53664  \u44068 \u47084 \u47532 </h2><div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer"><img src="https://images.unsplash.com/photo-1581092921462-682d0e794b5b?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer"><img src="https://images.unsplash.com/photo-1632125952973-499427675e7b?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer"></div></div></section>\
+            <section data-page-group="community" id="community-youtube" class="page-section py-20 bg-white hidden"><div class="container mx-auto px-6"><div class="flex justify-center border-b mb-12"><div class="sub-nav" data-group="community"><a href="#community-notices" class="sub-nav-tab nav-link">\uc0\u44277 \u51648 \u49324 \u54637 </a><a href="#community-gallery" class="sub-nav-tab nav-link">\u54252 \u53664  \u44068 \u47084 \u47532 </a><a href="#community-youtube" class="sub-nav-tab nav-link">\u50976 \u53916 \u48652  \u52292 \u45328 </a></div></div><h2 class="section-title">\u50976 \u53916 \u48652  \u52292 \u45328 </h2><div class="mt-12 grid md:grid-cols-2 gap-8"><div class="aspect-w-16 aspect-h-9"><iframe src="https://www.youtube.com/embed/EngW7t_J_OQ" class="rounded-lg w-full h-full"></iframe></div><div class="aspect-w-16 aspect-h-9"><iframe src="https://www.youtube.com/embed/s_6y_i32a2o" class="rounded-lg w-full h-full"></iframe></div></div></div></section>\
+        </div>\
+    </main>\
+\
+    <footer class="bg-gray-800 text-white py-8"><div class="container mx-auto px-6 text-center"><p>&copy; 2025 Autolab. All Rights Reserved.</p><p class="text-sm text-gray-400 mt-2">\uc0\u48376  \u49324 \u51060 \u53944 \u45716  \u54252 \u53944 \u54260 \u47532 \u50724  \u47785 \u51201 \u51004 \u47196  \u51228 \u51089 \u46104 \u50632 \u49845 \u45768 \u45796 .</p></div></footer>\
+\
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>\
+    <script>\
+        document.addEventListener('DOMContentLoaded', function () \{\
+            const mobileMenuButton = document.getElementById('mobile-menu-button');\
+            const mobileMenu = document.getElementById('mobile-menu');\
+            mobileMenuButton.addEventListener('click', () => \{ mobileMenu.classList.toggle('hidden'); \});\
+\
+            const swiper = new Swiper('.swiper', \{ loop: true, autoplay: \{ delay: 5000, disableOnInteraction: false \}, pagination: \{ el: '.swiper-pagination', clickable: true \} \});\
+\
+            const mainContent = document.querySelectorAll('.main-content');\
+            const pageSections = document.querySelectorAll('.page-section');\
+            const navLinks = document.querySelectorAll('.nav-link');\
+            const navButtons = document.querySelectorAll('.nav-button');\
+            const subNavs = document.querySelectorAll('.sub-nav');\
+\
+            const showPage = (targetId) => \{\
+                window.scrollTo(\{ top: 0, behavior: 'auto' \});\
+                \
+                if (targetId === '#home') \{\
+                    pageSections.forEach(section => section.classList.add('hidden'));\
+                    mainContent.forEach(section => section.classList.remove('hidden'));\
+                \} else \{\
+                    mainContent.forEach(section => section.classList.add('hidden'));\
+                    pageSections.forEach(section => section.classList.add('hidden'));\
+                    const targetElement = document.querySelector(targetId);\
+                    if (targetElement) \{\
+                        targetElement.classList.remove('hidden');\
+                        \
+                        // \uc0\u49436 \u48652 \u45348 \u48708 \u44172 \u51060 \u49496  \u54876 \u49457 \u54868 \
+                        const group = targetElement.dataset.pageGroup;\
+                        subNavs.forEach(nav => \{\
+                            if (nav.dataset.group === group) \{\
+                                nav.querySelectorAll('.sub-nav-tab').forEach(tab => \{\
+                                    if (tab.getAttribute('href') === targetId) \{\
+                                        tab.classList.add('active');\
+                                    \} else \{\
+                                        tab.classList.remove('active');\
+                                    \}\
+                                \});\
+                            \}\
+                        \});\
+                    \}\
+                \}\
+                if (!mobileMenu.classList.contains('hidden')) \{ mobileMenu.classList.add('hidden'); \}\
+            \};\
+\
+            navLinks.forEach(link => \{\
+                link.addEventListener('click', (e) => \{\
+                    e.preventDefault();\
+                    showPage(link.getAttribute('href'));\
+                \});\
+            \});\
+\
+            navButtons.forEach(button => \{\
+                button.addEventListener('click', (e) => \{\
+                    const targetId = button.dataset.target;\
+                    if (targetId) \{\
+                        showPage(targetId);\
+                    \}\
+                \});\
+            \});\
+        \});\
+    </script>\
+\
+</body>\
+</html>\
+}
