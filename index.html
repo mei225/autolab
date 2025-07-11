@@ -250,7 +250,7 @@
                         });
                     }).then(() => {
                         showCartModal(product.name);
-                        fetchCart(); // Firestore에서 장바구니 다시 불러오기
+                        fetchCart();
                     });
                 }
             }
@@ -452,11 +452,13 @@
                     // 실제 서비스에서는 Firestore나 Custom Claims로 관리자 확인
                     const isAdmin = user.email === 'admin@autolab.com'; // 예시 관리자 계정
                     loggedInUser = isAdmin ? 'admin' : 'member';
-                    if (!document.querySelector(location.hash)) {
-                        showPage(isAdmin ? '#admin-page' : '#home');
-                    }
+                    alert('로그인되었습니다.');
+                    showPage(isAdmin ? '#admin-page' : '#home');
                     fetchCart();
                 } else {
+                    if (loggedInUser) { // Only show alert if a user was previously logged in
+                        alert('로그아웃 되었습니다.');
+                    }
                     loggedInUser = null;
                     cart = [];
                     updateCart();
@@ -467,7 +469,11 @@
             // --- Initial Data Fetch ---
             async function fetchCart() {
                 const user = auth.currentUser;
-                if (!user) return;
+                if (!user) {
+                    cart = [];
+                    updateCart();
+                    return;
+                };
                 const querySnapshot = await db.collection('users').doc(user.uid).collection('cart').get();
                 cart = [];
                 querySnapshot.forEach(doc => {
