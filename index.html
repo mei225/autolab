@@ -448,15 +448,13 @@
             };
 
             const showNoticeDetail = (noticeId) => {
-                db.collection('notices').doc(noticeId).get().then(doc => {
-                    if (doc.exists) {
-                        const notice = doc.data();
-                        document.getElementById('notice-detail-title').textContent = notice.title;
-                        document.getElementById('notice-detail-date').textContent = notice.date;
-                        document.getElementById('notice-detail-content').innerHTML = notice.content;
-                        showPage('#community-notice-detail');
-                    }
-                });
+                const notice = notices.find(n => n.id === noticeId);
+                if(notice) {
+                    document.getElementById('notice-detail-title').textContent = notice.title;
+                    document.getElementById('notice-detail-date').textContent = notice.date;
+                    document.getElementById('notice-detail-content').innerHTML = notice.content;
+                    showPage('#community-notice-detail');
+                }
             };
             
             navButtons.forEach(button => {
