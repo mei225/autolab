@@ -33,7 +33,7 @@
         .cart-badge { @apply absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center; }
         
         .modal-backdrop { @apply fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center; }
-        .modal-content { @apply bg-white rounded-lg shadow-xl p-6 w-full max-w-sm; }
+        .modal-content { @apply bg-white rounded-lg shadow-xl p-6 w-full max-w-lg; }
 
         #back-to-top { @apply fixed bottom-10 right-10 bg-navy text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-opacity opacity-0 invisible; }
         #back-to-top.visible { @apply opacity-100 visible; }
@@ -145,6 +145,10 @@
                     <form id="add-product-form" class="space-y-2 mb-4"><input id="new-product-name" type="text" placeholder="새 제품명" class="w-full p-2 border rounded" required><input id="new-product-price" type="number" placeholder="가격" class="w-full p-2 border rounded" required><input id="new-product-desc" type="text" placeholder="제품 설명" class="w-full p-2 border rounded" required><input id="new-product-img" type="text" placeholder="이미지 URL" class="w-full p-2 border rounded" required><button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">새 제품 추가</button></form>
                     <div class="overflow-x-auto"><table id="admin-products-table" class="w-full text-left"><thead><tr class="border-b"><th class="p-2">제품명</th><th class="p-2">가격</th><th class="p-2">작업</th></tr></thead><tbody></tbody></table></div>
                 </div>
+                 <div>
+                    <h4 class="font-semibold text-lg mb-4 border-b pb-2">회원 관리</h4>
+                    <div class="overflow-x-auto"><table id="admin-users-table" class="w-full text-left"><thead><tr class="border-b"><th class="p-2">이메일</th><th class="p-2">역할</th><th class="p-2">작업</th></tr></thead><tbody></tbody></table></div>
+                </div>
             </div></div></div></div></section>
         </div>
     </main>
@@ -171,6 +175,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
 
     <script>
         // Firebase 설정 코드
@@ -188,6 +193,7 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
+        const storage = firebase.storage();
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -196,6 +202,7 @@
             // --- DATA ---
             let products = [];
             let notices = [];
+            let users = [];
             let cart = [];
             let currentUserState = null; // null, 'member', 'admin'
 
@@ -210,6 +217,7 @@
             const addedProductName = document.getElementById('added-product-name');
             const adminNoticesTableBody = document.querySelector('#admin-notices-table tbody');
             const adminProductsTableBody = document.querySelector('#admin-products-table tbody');
+            const adminUsersTableBody = document.querySelector('#admin-users-table tbody');
 
             // --- Helper Functions ---
             const showCartModal = (productName) => {
@@ -260,6 +268,15 @@
                         row.className = 'border-b';
                         row.innerHTML = `<td class="p-2">${p.name}</td><td class="p-2">₩${p.price.toLocaleString()}</td><td class="p-2"><button class="text-sm text-gray-600 hover:text-navy mr-2">수정</button><button data-id="${p.id}" data-type="product" class="delete-btn text-sm text-red-600 hover:text-red-800">삭제</button></td>`;
                         adminProductsTableBody.appendChild(row);
+                    });
+                }
+                if (adminUsersTableBody) {
+                    adminUsersTableBody.innerHTML = '';
+                    users.forEach(u => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-b';
+                        row.innerHTML = `<td class="p-2">${u.email}</td><td class="p-2">${u.role}</td><td class="p-2"><button class="text-sm text-red-600 hover:text-red-800">삭제</button></td>`;
+                        adminUsersTableBody.appendChild(row);
                     });
                 }
             }
@@ -367,9 +384,7 @@
                 const password = document.getElementById('login-password').value;
                 auth.signInWithEmailAndPassword(email, password)
                     .then((userCredential) => {
-                        alert("로그인되었습니다.");
-                        const isAdmin = userCredential.user.email === 'admin@autolab.com';
-                        showPage(isAdmin ? '#admin-page' : '#home');
+                        // onAuthStateChanged will handle UI and page changes
                     })
                     .catch((error) => alert("로그인 실패: " + error.message));
             });
@@ -384,9 +399,15 @@
                     return;
                 }
                 auth.createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        // Create a user document in Firestore
+                        return db.collection('users').doc(userCredential.user.uid).set({
+                            email: userCredential.user.email,
+                            role: 'member'
+                        });
+                    })
                     .then(() => {
-                        alert("회원가입에 성공했습니다. 자동으로 로그인됩니다.");
-                        // onAuthStateChanged will handle page navigation
+                        // onAuthStateChanged will handle UI and page changes
                     })
                     .catch((error) => alert("회원가입 실패: " + error.message));
             });
@@ -508,9 +529,14 @@
                 if (user) {
                     const isAdmin = user.email === 'admin@autolab.com';
                     currentUserState = isAdmin ? 'admin' : 'member';
+                    if (!wasLoggedIn) { // Fresh login/signup
+                        alert(wasLoggedIn ? "로그인되었습니다." : "회원가입 및 로그인되었습니다.");
+                        showPage(isAdmin ? '#admin-page' : '#home');
+                    }
                     fetchCart();
                 } else {
-                    if (wasLoggedIn) {
+                    if (wasLoggedIn) { // Fresh logout
+                        alert('로그아웃 되었습니다.');
                         showPage('#home');
                     }
                     currentUserState = null;
@@ -537,23 +563,30 @@
             }
 
             function fetchData() {
-                db.collection("products").get().then((querySnapshot) => {
+                db.collection("products").onSnapshot((querySnapshot) => {
                     products = [];
                     querySnapshot.forEach((doc) => {
                         products.push({ id: doc.id, ...doc.data() });
                     });
                     renderProducts();
                     renderAdminPage();
-                }).catch(error => console.error("Error fetching products: ", error));
+                });
 
-                db.collection("notices").orderBy("date", "desc").get().then((querySnapshot) => {
+                db.collection("notices").orderBy("date", "desc").onSnapshot((querySnapshot) => {
                     notices = [];
                     querySnapshot.forEach((doc) => {
                         notices.push({ id: doc.id, ...doc.data() });
                     });
                     renderNotices();
                     renderAdminPage();
-                }).catch(error => console.error("Error fetching notices: ", error));
+                });
+                 db.collection("users").onSnapshot((querySnapshot) => {
+                    users = [];
+                    querySnapshot.forEach((doc) => {
+                        users.push({ id: doc.id, ...doc.data() });
+                    });
+                    renderAdminPage();
+                });
             }
             
             // Admin form submissions
@@ -568,7 +601,6 @@
                     .then(() => {
                         alert('공지사항이 추가되었습니다.');
                         addNoticeForm.reset();
-                        fetchData();
                     })
                     .catch(err => alert('오류 발생: ' + err.message));
                 });
@@ -586,7 +618,6 @@
                     .then(() => {
                         alert('제품이 추가되었습니다.');
                         addProductForm.reset();
-                        fetchData();
                     })
                     .catch(err => alert('오류 발생: ' + err.message));
                 });
