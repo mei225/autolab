@@ -134,7 +134,18 @@
             <section id="cart-page" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">장바구니</h1><div id="cart-items-container" class="mt-12 max-w-4xl mx-auto animate-on-scroll"></div></div></div></section>
 
             <!-- 관리자 페이지 -->
-            <section id="admin-page" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">관리자 페이지</h1><div class="bg-white p-8 rounded-lg shadow-md animate-on-scroll"><h3 class="text-xl font-bold text-navy mb-6">콘텐츠 관리</h3><p class="text-sm text-gray-600 mb-6">이 페이지는 관리자 기능의 UI 예시입니다. 실제 데이터 수정 및 저장을 위해서는 Firebase와 같은 백엔드 연동이 필요합니다.</p><div class="space-y-12"><div><h4 class="font-semibold text-lg mb-4 border-b pb-2">공지사항 관리</h4><div class="space-y-2 mb-4"><input type="text" placeholder="새 공지사항 제목" class="w-full p-2 border rounded"><button class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">새 공지 추가</button></div><table class="w-full text-left"><thead><tr class="border-b"><th class="p-2">제목</th><th class="p-2">날짜</th><th class="p-2">작업</th></tr></thead><tbody><tr class="border-b"><td class="p-2">2025년 하반기 R&D 교육생 모집</td><td class="p-2">2025-07-11</td><td class="p-2"><button class="text-sm text-gray-600 hover:text-navy">수정</button> <button class="text-sm text-red-600 hover:text-red-800">삭제</button></td></tr></tbody></table></div><div><h4 class="font-semibold text-lg mb-4 border-b pb-2">제품 관리</h4><div class="space-y-2 mb-4"><input type="text" placeholder="새 제품명" class="w-full p-2 border rounded"><input type="number" placeholder="가격" class="w-full p-2 border rounded"><button class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">새 제품 추가</button></div><table class="w-full text-left"><thead><tr class="border-b"><th class="p-2">제품명</th><th class="p-2">가격</th><th class="p-2">작업</th></tr></thead><tbody><tr class="border-b"><td class="p-2">Arduino Uno R3</td><td class="p-2">₩15,000</td><td class="p-2"><button class="text-sm text-gray-600 hover:text-navy">수정</button> <button class="text-sm text-red-600 hover:text-red-800">삭제</button></td></tr><tr class="border-b"><td class="p-2">초음파 센서 HC-SR04</td><td class="p-2">₩2,500</td><td class="p-2"><button class="text-sm text-gray-600 hover:text-navy">수정</button> <button class="text-sm text-red-600 hover:text-red-800">삭제</button></td></tr></tbody></table></div></div></div></div></div></section>
+            <section id="admin-page" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">관리자 페이지</h1><div class="bg-white p-8 rounded-lg shadow-md animate-on-scroll"><h3 class="text-xl font-bold text-navy mb-6">콘텐츠 관리</h3><div class="space-y-12">
+                <div>
+                    <h4 class="font-semibold text-lg mb-4 border-b pb-2">공지사항 관리</h4>
+                    <form id="add-notice-form" class="space-y-2 mb-4"><input id="new-notice-title" type="text" placeholder="새 공지사항 제목" class="w-full p-2 border rounded" required><textarea id="new-notice-content" placeholder="공지 내용 (HTML 태그 사용 가능)" class="w-full p-2 border rounded" rows="3" required></textarea><button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">새 공지 추가</button></form>
+                    <div class="overflow-x-auto"><table id="admin-notices-table" class="w-full text-left"><thead><tr class="border-b"><th class="p-2">제목</th><th class="p-2">날짜</th><th class="p-2">작업</th></tr></thead><tbody></tbody></table></div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4 border-b pb-2">제품 관리</h4>
+                    <form id="add-product-form" class="space-y-2 mb-4"><input id="new-product-name" type="text" placeholder="새 제품명" class="w-full p-2 border rounded" required><input id="new-product-price" type="number" placeholder="가격" class="w-full p-2 border rounded" required><input id="new-product-desc" type="text" placeholder="제품 설명" class="w-full p-2 border rounded" required><input id="new-product-img" type="text" placeholder="이미지 URL" class="w-full p-2 border rounded" required><button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">새 제품 추가</button></form>
+                    <div class="overflow-x-auto"><table id="admin-products-table" class="w-full text-left"><thead><tr class="border-b"><th class="p-2">제품명</th><th class="p-2">가격</th><th class="p-2">작업</th></tr></thead><tbody></tbody></table></div>
+                </div>
+            </div></div></div></div></section>
         </div>
     </main>
     
@@ -197,6 +208,8 @@
             const backToTopButton = document.getElementById('back-to-top');
             const addToCartModal = document.getElementById('add-to-cart-modal');
             const addedProductName = document.getElementById('added-product-name');
+            const adminNoticesTableBody = document.querySelector('#admin-notices-table tbody');
+            const adminProductsTableBody = document.querySelector('#admin-products-table tbody');
 
             // --- Helper Functions ---
             const showCartModal = (productName) => {
@@ -226,6 +239,28 @@
                 }
                 if(mainNoticeList) {
                     mainNoticeList.innerHTML = notices.slice(0, 3).map(n => `<li class="flex justify-between items-center text-sm"><a href="#community-notice-detail" data-notice-id="${n.id}" class="hover:underline truncate nav-link">${n.title}</a><span class="text-gray-500 flex-shrink-0 ml-4">${n.date}</span></li>`).join('');
+                }
+            }
+            
+            // --- Admin Page Rendering ---
+            function renderAdminPage() {
+                if (adminNoticesTableBody) {
+                    adminNoticesTableBody.innerHTML = '';
+                    notices.forEach(n => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-b';
+                        row.innerHTML = `<td class="p-2">${n.title}</td><td class="p-2">${n.date}</td><td class="p-2"><button class="text-sm text-gray-600 hover:text-navy mr-2">수정</button><button data-id="${n.id}" data-type="notice" class="delete-btn text-sm text-red-600 hover:text-red-800">삭제</button></td>`;
+                        adminNoticesTableBody.appendChild(row);
+                    });
+                }
+                if (adminProductsTableBody) {
+                    adminProductsTableBody.innerHTML = '';
+                    products.forEach(p => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-b';
+                        row.innerHTML = `<td class="p-2">${p.name}</td><td class="p-2">₩${p.price.toLocaleString()}</td><td class="p-2"><button class="text-sm text-gray-600 hover:text-navy mr-2">수정</button><button data-id="${p.id}" data-type="product" class="delete-btn text-sm text-red-600 hover:text-red-800">삭제</button></td>`;
+                        adminProductsTableBody.appendChild(row);
+                    });
                 }
             }
 
@@ -309,10 +344,20 @@
                     });
                 }
                  if (e.target.closest('#logout-button')) {
-                    auth.signOut().then(() => {
-                        alert('로그아웃 되었습니다.');
-                        showPage('#home');
-                    });
+                    auth.signOut();
+                }
+                if (e.target.closest('.delete-btn')) {
+                    const btn = e.target.closest('.delete-btn');
+                    const id = btn.dataset.id;
+                    const type = btn.dataset.type;
+                    if (confirm('정말로 삭제하시겠습니까?')) {
+                        db.collection(type === 'notice' ? 'notices' : 'products').doc(id).delete()
+                        .then(() => {
+                            alert('삭제되었습니다.');
+                            fetchData();
+                        })
+                        .catch(err => alert('삭제 중 오류 발생: ' + err.message));
+                    }
                 }
             });
             
@@ -323,7 +368,8 @@
                 auth.signInWithEmailAndPassword(email, password)
                     .then((userCredential) => {
                         alert("로그인되었습니다.");
-                        // onAuthStateChanged will handle page navigation and UI updates
+                        const isAdmin = userCredential.user.email === 'admin@autolab.com';
+                        showPage(isAdmin ? '#admin-page' : '#home');
                     })
                     .catch((error) => alert("로그인 실패: " + error.message));
             });
@@ -392,6 +438,7 @@
                     if (targetElement) {
                         targetElement.classList.remove('hidden');
                         if (targetId === '#cart-page') updateCart();
+                        if (targetId === '#admin-page') renderAdminPage();
                         
                         const elementsToAnimate = targetElement.querySelectorAll('.animate-on-scroll');
                         elementsToAnimate.forEach(el => observer.observe(el));
@@ -459,11 +506,15 @@
             
             // --- Firebase Auth State Listener ---
             auth.onAuthStateChanged(user => {
+                const wasLoggedIn = !!currentUserState;
                 if (user) {
                     const isAdmin = user.email === 'admin@autolab.com';
                     currentUserState = isAdmin ? 'admin' : 'member';
                     fetchCart();
                 } else {
+                    if (wasLoggedIn) {
+                        showPage('#home');
+                    }
                     currentUserState = null;
                     cart = [];
                     updateCart();
@@ -494,6 +545,7 @@
                         products.push({ id: doc.id, ...doc.data() });
                     });
                     renderProducts();
+                    renderAdminPage();
                 }).catch(error => console.error("Error fetching products: ", error));
 
                 db.collection("notices").orderBy("date", "desc").get().then((querySnapshot) => {
@@ -502,7 +554,44 @@
                         notices.push({ id: doc.id, ...doc.data() });
                     });
                     renderNotices();
+                    renderAdminPage();
                 }).catch(error => console.error("Error fetching notices: ", error));
+            }
+            
+            // Admin form submissions
+            const addNoticeForm = document.getElementById('add-notice-form');
+            if(addNoticeForm) {
+                addNoticeForm.addEventListener('submit', e => {
+                    e.preventDefault();
+                    const title = document.getElementById('new-notice-title').value;
+                    const content = document.getElementById('new-notice-content').value;
+                    const date = new Date().toISOString().slice(0, 10);
+                    db.collection('notices').add({ title, content, date })
+                    .then(() => {
+                        alert('공지사항이 추가되었습니다.');
+                        addNoticeForm.reset();
+                        fetchData();
+                    })
+                    .catch(err => alert('오류 발생: ' + err.message));
+                });
+            }
+            
+            const addProductForm = document.getElementById('add-product-form');
+            if(addProductForm) {
+                addProductForm.addEventListener('submit', e => {
+                    e.preventDefault();
+                    const name = document.getElementById('new-product-name').value;
+                    const price = Number(document.getElementById('new-product-price').value);
+                    const desc = document.getElementById('new-product-desc').value;
+                    const img = document.getElementById('new-product-img').value;
+                    db.collection('products').add({ name, price, desc, img })
+                    .then(() => {
+                        alert('제품이 추가되었습니다.');
+                        addProductForm.reset();
+                        fetchData();
+                    })
+                    .catch(err => alert('오류 발생: ' + err.message));
+                });
             }
 
             fetchData();
