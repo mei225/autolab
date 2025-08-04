@@ -297,22 +297,26 @@
             loading.textContent = "데이터를 불러오는 데 실패했습니다.";
         });
 
-        // --- Accordion Logic ---
+        // --- Accordion Logic (REVISED) ---
         noticeAccordion.addEventListener('click', (e) => {
             const header = e.target.closest('.accordion-header');
             if (!header) return;
 
             const content = header.nextElementSibling;
-            const icon = header.querySelector('i');
+            if (!content || !content.classList.contains('accordion-content')) return;
 
-            if (content.style.maxHeight) {
+            const icon = header.querySelector('i.fa-chevron-down');
+
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
                 content.style.maxHeight = null;
-                icon.classList.remove('rotate-180');
+                if(icon) icon.classList.remove('rotate-180');
             } else {
-                document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
-                document.querySelectorAll('.accordion-header i').forEach(i => i.classList.remove('rotate-180'));
+                // Optional: Close other accordions when one is opened
+                // document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+                // document.querySelectorAll('.accordion-header i.fa-chevron-down').forEach(i => i.classList.remove('rotate-180'));
+                
                 content.style.maxHeight = content.scrollHeight + "px";
-                icon.classList.add('rotate-180');
+                if(icon) icon.classList.add('rotate-180');
             }
         });
 
