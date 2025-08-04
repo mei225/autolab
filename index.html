@@ -121,7 +121,7 @@
                         </div>
                     </nav>
                     <!-- Search Button -->
-                    <a href="#search-modal" class="hidden lg:block ml-4 p-3 text-gray-500 hover:text-sky-600"><i class="fas fa-search"></i></a>
+                    <button class="search-btn hidden lg:block ml-4 p-3 text-gray-500 hover:text-sky-600"><i class="fas fa-search"></i></button>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -280,9 +280,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Other sections will be added here: Quote, Community, Location -->
-        <!-- ... -->
     </main>
 
     <!-- Footer -->
@@ -316,41 +313,37 @@
         </div>
     </footer>
 
-
-    <!-- Kakao Maps API Script will be here -->
+    <!-- Search Modal -->
+    <div id="search-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-start justify-center p-4 pt-24">
+        <div class="relative bg-white rounded-lg shadow-xl w-full max-w-2xl">
+            <div class="flex items-center p-2 border-b">
+                <i class="fas fa-search text-gray-400 mx-3"></i>
+                <input type="text" id="search-input" placeholder="검색어를 입력하세요..." class="w-full p-3 border-0 focus:ring-0">
+                <button id="close-search-btn" class="p-3 text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+        </div>
+    </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // --- Mobile Menu Logic (REVISED) ---
+            // --- Mobile Menu Logic ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenuContainer = document.getElementById('mobile-menu');
             const desktopNav = document.querySelector('header nav');
 
             function buildMobileMenu() {
                 mobileMenuContainer.innerHTML = ''; // Clear previous menu
-
                 const navItems = desktopNav.children;
-
                 for (const item of navItems) {
-                    // Dropdown items
                     if (item.classList.contains('dropdown')) {
                         const wrapper = document.createElement('div');
                         const parentLink = item.querySelector('a');
                         const subMenu = item.querySelector('.dropdown-menu');
-
-                        // Button to toggle the submenu
                         const toggleButton = document.createElement('button');
                         toggleButton.classList.add('w-full', 'flex', 'items-center', 'justify-between', 'px-4', 'py-3', 'text-lg', 'font-medium', 'text-left', 'text-gray-600', 'hover:bg-sky-50');
-                        toggleButton.innerHTML = `
-                            <span>${parentLink.textContent}</span>
-                            <i class="fas fa-chevron-down transition-transform duration-200"></i>
-                        `;
-                        
-                        // The actual submenu
+                        toggleButton.innerHTML = `<span>${parentLink.textContent}</span><i class="fas fa-chevron-down transition-transform duration-200"></i>`;
                         const mobileSubMenu = document.createElement('div');
                         mobileSubMenu.classList.add('hidden', 'pl-4', 'bg-gray-50');
-                        
-                        // Copy links from desktop submenu, including their href
                         subMenu.querySelectorAll('a').forEach(link => {
                             const clonedLink = document.createElement('a');
                             clonedLink.href = link.href;
@@ -358,65 +351,49 @@
                             clonedLink.classList.add('block', 'w-full', 'px-4', 'py-3', 'text-gray-700', 'hover:bg-sky-100');
                             mobileSubMenu.appendChild(clonedLink);
                         });
-                        
-                        // Event listener for toggling
                         toggleButton.addEventListener('click', (e) => {
-                            e.preventDefault(); // Prevent navigation
+                            e.preventDefault();
                             mobileSubMenu.classList.toggle('hidden');
                             toggleButton.querySelector('i').classList.toggle('rotate-180');
                         });
-
-
                         wrapper.appendChild(toggleButton);
                         wrapper.appendChild(mobileSubMenu);
                         mobileMenuContainer.appendChild(wrapper);
-
-                    } else { // Simple link items
+                    } else {
                         const clonedLink = item.cloneNode(true);
                         clonedLink.classList.add('block', 'w-full', 'px-4', 'py-3', 'text-lg', 'font-medium', 'text-gray-600', 'hover:bg-sky-50');
                         clonedLink.classList.remove('rounded-md');
                         mobileMenuContainer.appendChild(clonedLink);
                     }
                 }
+                const mobileSearchBtn = document.createElement('button');
+                mobileSearchBtn.classList.add('search-btn', 'block', 'w-full', 'px-4', 'py-3', 'text-lg', 'font-medium', 'text-left', 'text-gray-600', 'hover:bg-sky-50');
+                mobileSearchBtn.innerHTML = `<i class="fas fa-search mr-2"></i> 검색`;
+                mobileMenuContainer.appendChild(mobileSearchBtn);
                 
-                // Add search button at the end
-                const searchLink = document.querySelector('a[href="#search-modal"]');
-                if(searchLink){
-                    const mobileSearchLink = document.createElement('a');
-                    mobileSearchLink.href = searchLink.href;
-                    mobileSearchLink.classList.add('block', 'w-full', 'px-4', 'py-3', 'text-lg', 'font-medium', 'text-gray-600', 'hover:bg-sky-50');
-                    mobileSearchLink.innerHTML = `<i class="fas fa-search mr-2"></i> 검색`;
-                    mobileMenuContainer.appendChild(mobileSearchLink);
-                }
+                // Add event listener to the newly created mobile search button
+                document.querySelectorAll('.search-btn').forEach(btn => btn.addEventListener('click', openSearch));
             }
-
             buildMobileMenu();
-
             mobileMenuButton.addEventListener('click', (e) => {
                 e.stopPropagation();
                 mobileMenuContainer.classList.toggle('hidden');
             });
 
-            // Scroll Reveal Animation
+            // --- Scroll Reveal Animation ---
             const scrollElements = document.querySelectorAll('.scroll-reveal');
-            const elementInView = (el, dividend = 1) => {
-                const elementTop = el.getBoundingClientRect().top;
-                return (elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend);
-            };
-            const displayScrollElement = (element) => {
-                element.classList.add('visible');
-            };
+            const elementInView = (el) => el.getBoundingClientRect().top <= (window.innerHeight || document.documentElement.clientHeight) - 50;
             const handleScrollAnimation = () => {
                 scrollElements.forEach((el) => {
-                    if (elementInView(el, 1.1)) {
-                        displayScrollElement(el);
+                    if (elementInView(el)) {
+                        el.classList.add('visible');
                     }
                 });
             };
             window.addEventListener('scroll', handleScrollAnimation);
             handleScrollAnimation();
 
-            // Header Style Change on Scroll
+            // --- Header Style Change on Scroll ---
             const header = document.getElementById('header');
             window.onscroll = function() {
                 if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
@@ -427,6 +404,34 @@
                     header.classList.remove('h-16');
                 }
             };
+
+            // --- Search Logic ---
+            const searchModal = document.getElementById('search-modal');
+            const searchInput = document.getElementById('search-input');
+            const closeSearchBtn = document.getElementById('close-search-btn');
+
+            function openSearch() {
+                searchModal.classList.remove('hidden');
+                searchInput.focus();
+            }
+            function closeSearch() {
+                searchModal.classList.add('hidden');
+            }
+
+            document.querySelectorAll('.search-btn').forEach(btn => btn.addEventListener('click', openSearch));
+            closeSearchBtn.addEventListener('click', closeSearch);
+            searchModal.addEventListener('click', (e) => {
+                if (e.target === searchModal) closeSearch();
+            });
+
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const searchTerm = e.target.value.trim();
+                    if (searchTerm) {
+                        window.location.href = `./search.html?q=${encodeURIComponent(searchTerm)}`;
+                    }
+                }
+            });
         });
     </script>
 
