@@ -16,8 +16,8 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- Favicon (Dolphin) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐬</text></svg>">
+    <!-- Favicon: 이 경로에 실제 파비콘 이미지 파일(예: favicon.png)을 넣어주세요 -->
+    <link rel="icon" href="./favicon.png" type="image/png">
 
     <style>
         /* Custom Styles */
@@ -89,35 +89,34 @@
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <a href="./index.html" class="flex items-center space-x-2 shrink-0">
-                    <!-- 로고 이미지를 넣어주세요. (권장 높이: 40px) -->
-                    <img src="./logo.png" class="h-8 md:h-10">
+                    <img src="./logo.png" alt="AUTOLAB Logo" class="h-8 md:h-10">
                 </a>
 
                 <!-- Desktop Navigation -->
                 <div class="flex items-center">
                     <nav class="hidden lg:flex items-center space-x-2">
                         <div class="dropdown relative">
-                            <a href="./about.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">회사소개</a>
+                            <a href="./about-intro.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">회사소개</a>
                             <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40 border border-gray-100">
-                                <a href="./about.html#intro" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">오토랩 소개</a>
-                                <a href="./about.html#history" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">사업연혁</a>
-                                <a href="./about.html#location" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">오시는길</a>
+                                <a href="./about-intro.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">AUTOLAB 소개</a>
+                                <a href="./about-history.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">사업연혁</a>
+                                <a href="./about-location.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">오시는길</a>
                             </div>
                         </div>
                         <div class="dropdown relative">
-                            <a href="./business.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">사업분야</a>
+                            <a href="./business-sensor.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">사업분야</a>
                             <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-48 border border-gray-100">
-                                <a href="./business.html#sensor" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">센서 개발 R&D</a>
-                                <a href="./business.html#ict" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">ICT 교육</a>
+                                <a href="./business-sensor.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">센서 개발 R&D</a>
+                                <a href="./business-ict.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">ICT 교육</a>
                             </div>
                         </div>
                         <a href="./quote.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600">견적문의</a>
                         <a href="./products.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600">제품소개</a>
                         <div class="dropdown relative">
-                            <a href="./community.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">커뮤니티</a>
+                            <a href="./community-notice.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">커뮤니티</a>
                             <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40 border border-gray-100">
-                                <a href="./community.html#notice" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">공지사항</a>
-                                <a href="./community.html#gallery" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">포토갤러리</a>
+                                <a href="./community-notice.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">공지사항</a>
+                                <a href="./community-gallery.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">포토갤러리</a>
                             </div>
                         </div>
                     </nav>
@@ -146,7 +145,6 @@
         <section id="home" class="h-screen relative flex items-center justify-center overflow-hidden">
             <!-- Background Video -->
             <video id="hero-video" autoplay loop muted playsinline>
-                <!-- 중요: 이 src를 실제 호스팅된 비디오 파일의 URL로 교체해주세요. -->
                 <source src="./background.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -172,32 +170,78 @@
                     자동차(Auto)와 실험실(Lab)의 결합. AUTOLAB은 끝없는 연구와 실험 정신을 바탕으로, ICT 기술의 경계를 허무는 자동화 기술과 교육 솔루션을 제공합니다.
                 </p>
                 <div class="mt-12">
-                    <a href="./about.html" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <a href="./about-intro.html" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-600 transition-all duration-300 shadow-lg hover:shadow-xl">
                         회사소개 더 알아보기
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Section 3: Technology -->
-        <section class="bg-white">
-            <div class="grid lg:grid-cols-2">
-                <div class="relative p-12 lg:p-24 flex items-center bg-gray-900 text-white scroll-reveal">
-                    <div>
-                        <h3 class="text-3xl lg:text-4xl font-bold mb-4">센서 개발 R&D</h3>
-                        <p class="text-lg text-gray-300 mb-6">초정밀 센서부터 AI 기반 인식 시스템까지, 산업의 미래를 여는 핵심 기술을 연구하고 개발합니다.</p>
-                        <a href="./business.html#sensor" class="font-semibold text-sky-400 hover:text-white">자세히 보기 &rarr;</a>
+        <!-- Section 3: Core Business (REVISED) -->
+        <section id="business" class="py-20 lg:py-32 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20 scroll-reveal">
+                    <h2 class="text-4xl font-extrabold text-gray-900">핵심 사업분야</h2>
+                    <p class="mt-4 text-lg text-gray-600">AUTOLAB은 두 가지 핵심 기술을 통해 미래를 선도합니다.</p>
+                </div>
+        
+                <!-- Item 1: Sensor R&D -->
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-24">
+                    <div class="relative scroll-reveal">
+                        <img src="https://placehold.co/800x600/1e293b/ffffff?text=Advanced+Sensor+Technology" alt="Sensor R&D" class="rounded-lg shadow-2xl w-full">
+                    </div>
+                    <div class="scroll-reveal">
+                        <span class="text-sky-500 font-semibold">01. SENSOR R&D</span>
+                        <h3 class="text-3xl lg:text-4xl font-bold text-gray-800 mt-2 mb-6">세상의 한계를<br>넘어서는 감각</h3>
+                        <p class="text-lg text-gray-600 mb-8">
+                            초정밀 센서부터 AI 기반 인식 시스템까지, 산업의 미래를 여는 핵심 기술을 연구하고 개발합니다. AUTOLAB의 센서 기술은 보이지 않는 것을 보고, 불가능을 가능하게 만듭니다.
+                        </p>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-sky-500 mt-1 mr-3"></i>
+                                <span><strong>초정밀 측정 기술:</strong> 미세한 변화도 놓치지 않는 정밀함</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-sky-500 mt-1 mr-3"></i>
+                                <span><strong>AI 융합 솔루션:</strong> 데이터를 분석하고 예측하는 스마트 센서</span>
+                            </li>
+                        </ul>
+                        <div class="mt-10">
+                            <a href="./business-sensor.html" class="font-bold text-sky-600 hover:text-sky-700 group">
+                                <span>자세히 보기</span>
+                                <span class="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">&rarr;</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="h-80 lg:h-auto bg-cover bg-center" style="background-image: url('./sensor.jpg');"></div>
-            </div>
-             <div class="grid lg:grid-cols-2">
-                <div class="h-80 lg:h-auto bg-cover bg-center lg:order-2" style="background-image: url('./edu.jpg');"></div>
-                <div class="relative p-12 lg:p-24 flex items-center bg-gray-50 scroll-reveal lg:order-1">
-                     <div>
-                        <h3 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">ICT 교육</h3>
-                        <p class="text-lg text-gray-600 mb-6">이론을 넘어 실제적인 문제 해결 능력을 키우는 실습 중심의 교육 프로그램을 통해 미래 인재를 양성합니다.</p>
-                        <a href="./business.html#ict" class="font-semibold text-sky-600 hover:text-sky-700">자세히 보기 &rarr;</a>
+        
+                <!-- Item 2: ICT Education -->
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <div class="scroll-reveal lg:order-2">
+                         <img src="https://placehold.co/800x600/e0f2fe/38bdf8?text=Future+ICT+Leaders" alt="ICT Education" class="rounded-lg shadow-2xl w-full">
+                    </div>
+                    <div class="scroll-reveal lg:order-1">
+                        <span class="text-sky-500 font-semibold">02. ICT EDUCATION</span>
+                        <h3 class="text-3xl lg:text-4xl font-bold text-gray-800 mt-2 mb-6">미래를 만드는<br>사람을 키웁니다</h3>
+                        <p class="text-lg text-gray-600 mb-8">
+                            이론을 넘어 실제적인 문제 해결 능력을 키우는 실습 중심의 교육 프로그램을 통해 미래 인재를 양성합니다. AUTOLAB의 교육은 단순한 지식 전달이 아닌, 경험을 통한 성장을 목표로 합니다.
+                        </p>
+                         <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-sky-500 mt-1 mr-3"></i>
+                                <span><strong>실무 중심 커리큘럼:</strong> 현장에서 바로 적용 가능한 기술 교육</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-sky-500 mt-1 mr-3"></i>
+                                <span><strong>최신 장비 활용:</strong> 최고의 환경에서 최고의 기술을 경험</span>
+                            </li>
+                        </ul>
+                        <div class="mt-10">
+                            <a href="./business-ict.html" class="font-bold text-sky-600 hover:text-sky-700 group">
+                                <span>자세히 보기</span>
+                                <span class="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">&rarr;</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
