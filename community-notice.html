@@ -306,17 +306,20 @@
             if (!content || !content.classList.contains('accordion-content')) return;
 
             const icon = header.querySelector('i.fa-chevron-down');
+            const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
 
-            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-                content.style.maxHeight = null;
-                if(icon) icon.classList.remove('rotate-180');
-            } else {
-                // Optional: Close other accordions when one is opened
-                // document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
-                // document.querySelectorAll('.accordion-header i.fa-chevron-down').forEach(i => i.classList.remove('rotate-180'));
-                
+            // Close all other accordions first
+            noticeAccordion.querySelectorAll('.accordion-content').forEach(item => {
+                item.style.maxHeight = null;
+            });
+            noticeAccordion.querySelectorAll('.accordion-header i.fa-chevron-down').forEach(item => {
+                item.classList.remove('rotate-180');
+            });
+
+            // If the clicked one was not already open, open it
+            if (!isOpen) {
                 content.style.maxHeight = content.scrollHeight + "px";
-                if(icon) icon.classList.add('rotate-180');
+                if (icon) icon.classList.add('rotate-180');
             }
         });
 
