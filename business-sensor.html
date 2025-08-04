@@ -51,33 +51,6 @@
         .rotate-180 {
             transform: rotate(180deg);
         }
-        /* Process Step Styling */
-        .process-step {
-            position: relative;
-            padding-bottom: 2rem;
-        }
-        .process-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 2rem;
-            top: 4.5rem;
-            height: calc(100% - 3rem);
-            border-left: 2px dashed #9ca3af;
-        }
-        @media (min-width: 768px) {
-            .process-step {
-                padding-bottom: 0;
-                padding-right: 2rem;
-            }
-            .process-step:not(:last-child)::after {
-                height: auto;
-                width: calc(100% - 4rem);
-                top: 2rem;
-                left: 4.5rem;
-                border-left: none;
-                border-top: 2px dashed #9ca3af;
-            }
-        }
     </style>
 </head>
 <body class="bg-white text-gray-700">
@@ -204,33 +177,46 @@
         <!-- Section 3: Tech Transfer Process -->
         <section id="tech-transfer" class="py-20 lg:py-32">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16 scroll-reveal">
+                <div class="text-center mb-20 scroll-reveal">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800">기술이전 프로세스</h2>
                     <p class="mt-4 text-lg text-gray-600">AUTOLAB의 축적된 센서 기술을 귀사의 것으로 만들어 드립니다.</p>
                 </div>
-                <div class="grid md:grid-cols-5 gap-8 text-center scroll-reveal">
-                    <div class="process-step">
-                        <div class="w-16 h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-handshake"></i></div>
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-8 md:space-y-0 md:space-x-4 scroll-reveal">
+                    <!-- Step 1 -->
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl shadow-sm"><i class="fas fa-handshake"></i></div>
                         <h4 class="mt-4 font-bold text-gray-800">Step 01</h4>
                         <p class="text-gray-600">사전미팅 및 운영전략</p>
                     </div>
-                    <div class="process-step">
-                        <div class="w-16 h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-tasks"></i></div>
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gray-300 text-2xl"><i class="fas fa-chevron-right"></i></div>
+                    <!-- Step 2 -->
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl shadow-sm"><i class="fas fa-tasks"></i></div>
                         <h4 class="mt-4 font-bold text-gray-800">Step 02</h4>
                         <p class="text-gray-600">업무분석 및 기초컨설팅</p>
                     </div>
-                    <div class="process-step">
-                        <div class="w-16 h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-award"></i></div>
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gray-300 text-2xl"><i class="fas fa-chevron-right"></i></div>
+                    <!-- Step 3 -->
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl shadow-sm"><i class="fas fa-award"></i></div>
                         <h4 class="mt-4 font-bold text-gray-800">Step 03</h4>
                         <p class="text-gray-600">업무 표준화 및 인원배정</p>
                     </div>
-                    <div class="process-step">
-                        <div class="w-16 h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gray-300 text-2xl"><i class="fas fa-chevron-right"></i></div>
+                    <!-- Step 4 -->
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl shadow-sm"><i class="fas fa-chalkboard-teacher"></i></div>
                         <h4 class="mt-4 font-bold text-gray-800">Step 04</h4>
-                        <p class="text-gray-600">업무 시작 확정 후 사전교육</p>
+                        <p class="text-gray-600">사전교육 진행</p>
                     </div>
-                    <div class="process-step">
-                        <div class="w-16 h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-file-alt"></i></div>
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gray-300 text-2xl"><i class="fas fa-chevron-right"></i></div>
+                    <!-- Step 5 -->
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl shadow-sm"><i class="fas fa-file-alt"></i></div>
                         <h4 class="mt-4 font-bold text-gray-800">Step 05</h4>
                         <p class="text-gray-600">업무시작 및 리포트 제출</p>
                     </div>
@@ -241,33 +227,46 @@
         <!-- Section 4: R&D Contract Process -->
         <section id="contract-process" class="py-20 lg:py-32 bg-gray-50">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16 scroll-reveal">
+                <div class="text-center mb-20 scroll-reveal">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800">센서 개발 R&D 의뢰 프로세스</h2>
                     <p class="mt-4 text-lg text-gray-600">아이디어를 현실로 만드는 가장 확실한 방법입니다.</p>
                 </div>
-                 <div class="grid md:grid-cols-5 gap-8 text-center scroll-reveal">
-                    <div class="process-step">
-                        <div class="w-16 h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-comments"></i></div>
+                 <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-8 md:space-y-0 md:space-x-4 scroll-reveal">
+                    <!-- Step 1 -->
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl shadow-sm"><i class="fas fa-comments"></i></div>
                         <h4 class="mt-4 font-bold text-gray-800">Step 01</h4>
-                        <p class="text-gray-600">견적서 및 운영프로세스 파악</p>
+                        <p class="text-gray-600">견적 및 프로세스 파악</p>
                     </div>
-                    <div class="process-step">
-                        <div class="w-16 h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-search-plus"></i></div>
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gray-300 text-2xl"><i class="fas fa-chevron-right"></i></div>
+                    <!-- Step 2 -->
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl shadow-sm"><i class="fas fa-search-plus"></i></div>
                         <h4 class="mt-4 font-bold text-gray-800">Step 02</h4>
-                        <p class="text-gray-600">기업 특성 및 세부 업무 분석</p>
+                        <p class="text-gray-600">기업 특성 및 업무 분석</p>
                     </div>
-                    <div class="process-step">
-                        <div class="w-16 h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-user-tie"></i></div>
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gray-300 text-2xl"><i class="fas fa-chevron-right"></i></div>
+                    <!-- Step 3 -->
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl shadow-sm"><i class="fas fa-user-tie"></i></div>
                         <h4 class="mt-4 font-bold text-gray-800">Step 03</h4>
-                        <p class="text-gray-600">운영실장 및 전문상담원 배정</p>
+                        <p class="text-gray-600">전문 인력 배정</p>
                     </div>
-                    <div class="process-step">
-                        <div class="w-16 h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-users"></i></div>
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gray-300 text-2xl"><i class="fas fa-chevron-right"></i></div>
+                    <!-- Step 4 -->
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl shadow-sm"><i class="fas fa-users"></i></div>
                         <h4 class="mt-4 font-bold text-gray-800">Step 04</h4>
-                        <p class="text-gray-600">복수인원 추가/교육 진행</p>
+                        <p class="text-gray-600">추가 인원 교육 진행</p>
                     </div>
-                    <div class="process-step">
-                        <div class="w-16 h-16 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-sync-alt"></i></div>
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gray-300 text-2xl"><i class="fas fa-chevron-right"></i></div>
+                    <!-- Step 5 -->
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl shadow-sm"><i class="fas fa-sync-alt"></i></div>
                         <h4 class="mt-4 font-bold text-gray-800">Step 05</h4>
                         <p class="text-gray-600">실시간 리포팅 및 피드백</p>
                     </div>
