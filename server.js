@@ -31,7 +31,7 @@ app.post('/api/quote', upload.single('file'), (req, res) => {
         service: 'gmail',
         auth: {
             user: '2025autolab@gmail.com', // 보내는 사람의 이메일 주소
-            pass: 'YOUR_GMAIL_APP_PASSWORD' // 생성한 Gmail 앱 비밀번호 16자리
+            pass: 'kenp hokl irqm kakc' // 생성한 Gmail 앱 비밀번호 16자리
         }
     });
 
