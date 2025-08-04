@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 결과 - AUTOLAB</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./favicon.png" type="image/png">
+
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-700">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 left-0 right-0 z-50 border-b border-gray-200/80">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="./index.html" class="flex items-center space-x-2 shrink-0">
+                    <img src="./logo.png" alt="AUTOLAB Logo" class="h-8 md:h-10">
+                </a>
+                <!-- Desktop Navigation -->
+                <div class="flex items-center">
+                    <nav class="hidden lg:flex items-center space-x-2">
+                        <!-- Navigation links here -->
+                    </nav>
+                    <button class="search-btn hidden lg:block ml-4 p-3 text-gray-500 hover:text-sky-600"><i class="fas fa-search"></i></button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-sky-500 focus:outline-none p-2"><i class="fas fa-bars fa-lg"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="py-20 lg:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div id="search-info" class="text-center mb-12">
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800">검색 결과</h1>
+                    <p id="search-query-display" class="mt-4 text-lg text-gray-600"></p>
+                </div>
+
+                <!-- Results sections -->
+                <div id="results-container" class="space-y-16">
+                    <!-- Products Results -->
+                    <section id="products-results-section" class="hidden">
+                        <h2 class="text-2xl font-bold border-b-2 border-sky-500 pb-2 mb-6">제품소개</h2>
+                        <div id="products-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                    </section>
+
+                    <!-- Notices Results -->
+                    <section id="notices-results-section" class="hidden">
+                        <h2 class="text-2xl font-bold border-b-2 border-sky-500 pb-2 mb-6">공지사항</h2>
+                        <div id="notices-list" class="border-t border-gray-200"></div>
+                    </section>
+
+                    <!-- Gallery Results -->
+                    <section id="gallery-results-section" class="hidden">
+                        <h2 class="text-2xl font-bold border-b-2 border-sky-500 pb-2 mb-6">포토갤러리</h2>
+                        <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8"></div>
+                    </section>
+
+                    <!-- No Results Message -->
+                    <div id="no-results" class="hidden text-center py-20">
+                        <p class="text-xl text-gray-500">검색 결과가 없습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <!-- Footer content from other pages -->
+    </footer>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-start justify-center p-4 pt-24">
+        <div class="relative bg-white rounded-lg shadow-xl w-full max-w-2xl">
+            <div class="flex items-center p-2 border-b">
+                <i class="fas fa-search text-gray-400 mx-3"></i>
+                <input type="text" id="search-input" placeholder="검색어를 입력하세요..." class="w-full p-3 border-0 focus:ring-0">
+                <button id="close-search-btn" class="p-3 text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+      
+        const firebaseConfig = {
+            apiKey: "AIzaSyAN0bbCZg8K2V12a-zpbf23_Z4U8CYmBms",
+            authDomain: "autolab-1cd53.firebaseapp.com",
+            projectId: "autolab-1cd53",
+            storageBucket: "autolab-1cd53.appspot.com",
+            messagingSenderId: "734510998647",
+            appId: "1:734510998647:web:f5547055d5ab933d279272",
+            measurementId: "G-CD93HMRDM5"
+        };
+      
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const searchQueryDisplay = document.getElementById('search-query-display');
+        const resultsContainer = document.getElementById('results-container');
+        const noResults = document.getElementById('no-results');
+
+        async function fetchAndSearch() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchTerm = urlParams.get('q');
+
+            if (!searchTerm) {
+                searchQueryDisplay.textContent = "검색어를 입력해주세요.";
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            searchQueryDisplay.innerHTML = `'<span class="text-sky-600">${searchTerm}</span>'에 대한 검색 결과입니다.`;
+            const lowerCaseSearchTerm = searchTerm.toLowerCase();
+            let totalResults = 0;
+
+            // Fetch all collections
+            const productsPromise = getDocs(collection(db, 'products'));
+            const noticesPromise = getDocs(query(collection(db, 'notices'), orderBy("createdAt", "desc")));
+            const galleryPromise = getDocs(query(collection(db, 'gallery'), orderBy("createdAt", "desc")));
+
+            const [productsSnapshot, noticesSnapshot, gallerySnapshot] = await Promise.all([productsPromise, noticesPromise, galleryPromise]);
+
+            // Filter Products
+            const productsResults = productsSnapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(p => p.title.toLowerCase().includes(lowerCaseSearchTerm) || p.description.toLowerCase().includes(lowerCaseSearchTerm));
+            
+            if (productsResults.length > 0) {
+                const section = document.getElementById('products-results-section');
+                const grid = document.getElementById('products-grid');
+                grid.innerHTML = '';
+                productsResults.forEach(product => {
+                    const item = document.createElement('a');
+                    item.href = './products.html'; // Or a detail page
+                    item.className = 'block bg-gray-50 rounded-lg overflow-hidden group border border-gray-200 hover:shadow-xl';
+                    item.innerHTML = `
+                        <img src="${product.imageUrl}" alt="${product.title}" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-800 truncate">${product.title}</h3>
+                            <p class="text-sm text-gray-600 line-clamp-2">${product.description}</p>
+                        </div>`;
+                    grid.appendChild(item);
+                });
+                section.classList.remove('hidden');
+                totalResults += productsResults.length;
+            }
+
+            // Filter Notices
+            const noticesResults = noticesSnapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(n => n.title.toLowerCase().includes(lowerCaseSearchTerm) || n.content.toLowerCase().includes(lowerCaseSearchTerm));
+
+            if (noticesResults.length > 0) {
+                const section = document.getElementById('notices-results-section');
+                const list = document.getElementById('notices-list');
+                list.innerHTML = '';
+                noticesResults.forEach(notice => {
+                    const date = notice.createdAt ? notice.createdAt.toDate().toLocaleDateString('ko-KR') : '';
+                    const item = document.createElement('a');
+                    item.href = './community-notice.html';
+                    item.className = 'block p-4 border-b border-gray-200 hover:bg-gray-50';
+                    item.innerHTML = `
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-800">${notice.title}</span>
+                            <span class="text-sm text-gray-500">${date}</span>
+                        </div>`;
+                    list.appendChild(item);
+                });
+                section.classList.remove('hidden');
+                totalResults += noticesResults.length;
+            }
+
+            // Filter Gallery
+            const galleryResults = gallerySnapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(p => p.title.toLowerCase().includes(lowerCaseSearchTerm) || p.description.toLowerCase().includes(lowerCaseSearchTerm));
+
+            if (galleryResults.length > 0) {
+                const section = document.getElementById('gallery-results-section');
+                const grid = document.getElementById('gallery-grid');
+                grid.innerHTML = '';
+                galleryResults.forEach(photo => {
+                    const item = document.createElement('a');
+                    item.href = './community-gallery.html';
+                    item.className = 'block group';
+                    item.innerHTML = `
+                        <div class="aspect-square overflow-hidden rounded-lg">
+                            <img src="${photo.imageUrl}" alt="${photo.title}" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="mt-2 font-medium text-gray-800 truncate">${photo.title}</h3>`;
+                    grid.appendChild(item);
+                });
+                section.classList.remove('hidden');
+                totalResults += galleryResults.length;
+            }
+
+            if (totalResults === 0) {
+                noResults.classList.remove('hidden');
+            }
+        }
+
+        fetchAndSearch();
+        
+        // --- Search Modal Logic ---
+        const searchModal = document.getElementById('search-modal');
+        const searchInput = document.getElementById('search-input');
+        const closeSearchBtn = document.getElementById('close-search-btn');
+
+        function openSearch() {
+            searchModal.classList.remove('hidden');
+            searchInput.focus();
+        }
+        function closeSearch() {
+            searchModal.classList.add('hidden');
+        }
+
+        document.querySelectorAll('.search-btn').forEach(btn => btn.addEventListener('click', openSearch));
+        closeSearchBtn.addEventListener('click', closeSearch);
+        searchModal.addEventListener('click', (e) => {
+            if (e.target === searchModal) closeSearch();
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const searchTerm = e.target.value.trim();
+                if (searchTerm) {
+                    window.location.href = `./search.html?q=${encodeURIComponent(searchTerm)}`;
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
