@@ -66,6 +66,19 @@
         .rotate-180 {
             transform: rotate(180deg);
         }
+        /* Background Video */
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            transform: translateX(-50%) translateY(-50%);
+            background-size: cover;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-700">
@@ -86,7 +99,7 @@
                         <div class="dropdown relative">
                             <a href="./about.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">회사소개</a>
                             <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40 border border-gray-100">
-                                <a href="./about.html#intro" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">AUTOLAB 소개</a>
+                                <a href="./about.html#intro" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">오토랩 소개</a>
                                 <a href="./about.html#history" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">사업연혁</a>
                                 <a href="./about.html#location" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">오시는길</a>
                             </div>
@@ -130,8 +143,19 @@
     <!-- Main Content -->
     <main>
         <!-- Section 1: Hero -->
-        <section id="home" class="h-screen flex items-center justify-center bg-cover bg-center bg-gray-800" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./background.mp4');">
-            <div class="text-center text-white px-4 hero-text">
+        <section id="home" class="h-screen relative flex items-center justify-center overflow-hidden">
+            <!-- Background Video -->
+            <video id="hero-video" autoplay loop muted playsinline>
+                <!-- 중요: 이 src를 실제 호스팅된 비디오 파일의 URL로 교체해주세요. -->
+                <source src="./background.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            
+            <!-- Video Overlay -->
+            <div class="absolute top-0 left-0 w-full h-full bg-black/50"></div>
+
+            <!-- Hero Text -->
+            <div class="relative z-10 text-center text-white px-4 hero-text">
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">미래를 향한 끝없는 탐구,<br>기술의 한계를 넘어서다.</h1>
                 <p class="mt-6 text-lg md:text-xl opacity-80">AUTOLAB은 혁신적인 기술로 내일의 가능성을 현실로 만듭니다.</p>
             </div>
@@ -290,22 +314,12 @@
                             clonedLink.classList.add('block', 'w-full', 'px-4', 'py-3', 'text-gray-700', 'hover:bg-sky-100');
                             mobileSubMenu.appendChild(clonedLink);
                         });
-
-                        // Event listener for toggling
-                        toggleButton.addEventListener('click', () => {
-                            // First, navigate to the parent page
-                            window.location.href = parentLink.href;
-                            // Then, toggle submenu (might not be visible after navigation, but sets up the state)
-                            mobileSubMenu.classList.toggle('hidden');
-                            toggleButton.querySelector('i').classList.toggle('rotate-180');
-                        });
                         
-                        // We create a separate button for just toggling, to prevent navigation
-                        const onlyToggleButton = toggleButton.querySelector('i');
+                        // Event listener for toggling
                         toggleButton.addEventListener('click', (e) => {
                             e.preventDefault(); // Prevent navigation
                             mobileSubMenu.classList.toggle('hidden');
-                            onlyToggleButton.classList.toggle('rotate-180');
+                            toggleButton.querySelector('i').classList.toggle('rotate-180');
                         });
 
 
