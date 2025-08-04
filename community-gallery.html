@@ -134,7 +134,7 @@
         <!-- Gallery Section -->
         <section id="gallery" class="py-20 lg:py-32">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8">
                     <p id="loading" class="col-span-full text-center text-gray-500">사진을 불러오는 중...</p>
                 </div>
             </div>
@@ -198,10 +198,12 @@
 
     <!-- Lightbox Modal -->
     <div id="lightbox-modal" class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4">
-        <div class="relative">
-            <button id="close-lightbox-btn" class="absolute -top-10 right-0 text-white text-3xl">&times;</button>
-            <img id="lightbox-image" src="" alt="Enlarged photo" class="max-w-full max-h-[80vh] rounded-lg">
-            <p id="lightbox-caption" class="text-white text-center mt-4"></p>
+        <div class="relative max-w-4xl w-full">
+            <button id="close-lightbox-btn" class="absolute -top-12 right-0 text-white text-4xl">&times;</button>
+            <img id="lightbox-image" src="" alt="Enlarged photo" class="max-w-full max-h-[75vh] rounded-lg mx-auto">
+            <div id="lightbox-caption" class="text-white text-left mt-4 p-4 bg-black bg-opacity-50 rounded-b-lg">
+                <!-- Caption content will be inserted here by JS -->
+            </div>
         </div>
     </div>
     
@@ -255,7 +257,10 @@
 
             localPhotos.forEach(photo => {
                 const photoWrapper = document.createElement('div');
-                photoWrapper.className = 'relative group aspect-square';
+                photoWrapper.className = 'group';
+
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'relative aspect-square';
 
                 const img = document.createElement('img');
                 img.src = photo.imageUrl;
@@ -264,7 +269,7 @@
                 img.dataset.title = photo.title;
                 img.dataset.description = photo.description;
 
-                photoWrapper.appendChild(img);
+                imageContainer.appendChild(img);
 
                 if (isAdmin) {
                     const overlay = document.createElement('div');
@@ -273,9 +278,15 @@
                         <button data-id="${photo.id}" class="edit-btn bg-blue-500 text-white w-16 h-9 rounded-md hover:bg-blue-600 text-sm">수정</button>
                         <button data-id="${photo.id}" class="delete-btn bg-red-500 text-white w-16 h-9 rounded-md hover:bg-red-600 text-sm">삭제</button>
                     `;
-                    photoWrapper.appendChild(overlay);
+                    imageContainer.appendChild(overlay);
                 }
                 
+                const titleElement = document.createElement('h3');
+                titleElement.className = "mt-2 font-medium text-gray-800 truncate";
+                titleElement.textContent = photo.title;
+
+                photoWrapper.appendChild(imageContainer);
+                photoWrapper.appendChild(titleElement);
                 galleryGrid.appendChild(photoWrapper);
             });
         }
@@ -342,7 +353,8 @@
         });
         
         galleryGrid.addEventListener('click', async (e) => {
-            const id = e.target.dataset.id;
+            const id = e.target.closest('.group')?.querySelector('.edit-btn')?.dataset.id;
+            
             if (e.target.classList.contains('edit-btn')) {
                 const photoToEdit = localPhotos.find(p => p.id === id);
                 openModal(photoToEdit);
@@ -357,7 +369,12 @@
                 }
             } else if (e.target.tagName === 'IMG' && !isAdmin) { // Lightbox
                 lightboxImage.src = e.target.src;
-                lightboxCaption.textContent = e.target.dataset.title;
+                const title = e.target.dataset.title || '';
+                const description = e.target.dataset.description || '';
+                lightboxCaption.innerHTML = `
+                    <h3 class="font-bold text-xl mb-2">${title}</h3>
+                    <p>${description}</p>
+                `;
                 lightboxModal.classList.remove('hidden');
             }
         });
