@@ -63,6 +63,9 @@
         .mission-bg {
             background-attachment: fixed;
         }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body class="bg-white text-gray-700">
@@ -250,18 +253,90 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Mobile Menu Logic
+            // --- Mobile Menu Logic (REVISED) ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuContainer = document.getElementById('mobile-menu');
             const desktopNav = document.querySelector('header nav');
-            
-            if (desktopNav) {
-                mobileMenu.innerHTML = desktopNav.innerHTML;
+
+            function buildMobileMenu() {
+                mobileMenuContainer.innerHTML = ''; // Clear previous menu
+
+                const navItems = desktopNav.children;
+
+                for (const item of navItems) {
+                    // Dropdown items
+                    if (item.classList.contains('dropdown')) {
+                        const wrapper = document.createElement('div');
+                        const parentLink = item.querySelector('a');
+                        const subMenu = item.querySelector('.dropdown-menu');
+
+                        // Button to toggle the submenu
+                        const toggleButton = document.createElement('button');
+                        toggleButton.classList.add('w-full', 'flex', 'items-center', 'justify-between', 'px-4', 'py-3', 'text-lg', 'font-medium', 'text-left', 'text-gray-600', 'hover:bg-sky-50');
+                        toggleButton.innerHTML = `
+                            <span>${parentLink.textContent}</span>
+                            <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                        `;
+                        
+                        // The actual submenu
+                        const mobileSubMenu = document.createElement('div');
+                        mobileSubMenu.classList.add('hidden', 'pl-4', 'bg-gray-50');
+                        
+                        // Copy links from desktop submenu, including their href
+                        subMenu.querySelectorAll('a').forEach(link => {
+                            const clonedLink = document.createElement('a');
+                            clonedLink.href = link.href;
+                            clonedLink.textContent = link.textContent;
+                            clonedLink.classList.add('block', 'w-full', 'px-4', 'py-3', 'text-gray-700', 'hover:bg-sky-100');
+                            mobileSubMenu.appendChild(clonedLink);
+                        });
+
+                        // Event listener for toggling
+                        toggleButton.addEventListener('click', () => {
+                            // First, navigate to the parent page
+                            window.location.href = parentLink.href;
+                            // Then, toggle submenu (might not be visible after navigation, but sets up the state)
+                            mobileSubMenu.classList.toggle('hidden');
+                            toggleButton.querySelector('i').classList.toggle('rotate-180');
+                        });
+                        
+                        // We create a separate button for just toggling, to prevent navigation
+                        const onlyToggleButton = toggleButton.querySelector('i');
+                        toggleButton.addEventListener('click', (e) => {
+                            e.preventDefault(); // Prevent navigation
+                            mobileSubMenu.classList.toggle('hidden');
+                            onlyToggleButton.classList.toggle('rotate-180');
+                        });
+
+
+                        wrapper.appendChild(toggleButton);
+                        wrapper.appendChild(mobileSubMenu);
+                        mobileMenuContainer.appendChild(wrapper);
+
+                    } else { // Simple link items
+                        const clonedLink = item.cloneNode(true);
+                        clonedLink.classList.add('block', 'w-full', 'px-4', 'py-3', 'text-lg', 'font-medium', 'text-gray-600', 'hover:bg-sky-50');
+                        clonedLink.classList.remove('rounded-md');
+                        mobileMenuContainer.appendChild(clonedLink);
+                    }
+                }
+                
+                // Add search button at the end
+                const searchLink = document.querySelector('a[href="#search-modal"]');
+                if(searchLink){
+                    const mobileSearchLink = document.createElement('a');
+                    mobileSearchLink.href = searchLink.href;
+                    mobileSearchLink.classList.add('block', 'w-full', 'px-4', 'py-3', 'text-lg', 'font-medium', 'text-gray-600', 'hover:bg-sky-50');
+                    mobileSearchLink.innerHTML = `<i class="fas fa-search mr-2"></i> 검색`;
+                    mobileMenuContainer.appendChild(mobileSearchLink);
+                }
             }
+
+            buildMobileMenu();
 
             mobileMenuButton.addEventListener('click', (e) => {
                 e.stopPropagation();
-                mobileMenu.classList.toggle('hidden');
+                mobileMenuContainer.classList.toggle('hidden');
             });
 
             // Scroll Reveal Animation
