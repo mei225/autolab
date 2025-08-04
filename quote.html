@@ -129,8 +129,8 @@
                             <h2 class="text-2xl font-bold text-gray-800">R&D 견적 문의</h2>
                             <p class="text-gray-600 mt-2">센서 개발, 기술 컨설팅 등 R&D 프로젝트에 대해 문의해주세요.</p>
                         </div>
-                        <form id="rd-form" class="space-y-5">
-                            <input type="hidden" name="inquiryType" value="R&D 견적 문의">
+                        <form name="rd-inquiry" method="POST" data-netlify="true" class="space-y-5">
+                            <input type="hidden" name="form-name" value="rd-inquiry">
                             <input type="text" name="company" placeholder="회사/기관명" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500">
                             <input type="text" name="name" placeholder="담당자명" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500">
                             <input type="tel" name="phone" placeholder="연락처" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500">
@@ -145,7 +145,6 @@
                                 <label for="agree-rd" class="ml-2 block text-sm text-gray-900">개인정보 수집 및 이용에 동의합니다.</label>
                             </div>
                             <button type="submit" class="w-full bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition-colors">문의하기</button>
-                            <p id="rd-form-status" class="text-center mt-4"></p>
                         </form>
                     </div>
 
@@ -156,8 +155,8 @@
                             <h2 class="text-2xl font-bold text-gray-800">ICT 교육 견적 문의</h2>
                             <p class="text-gray-600 mt-2">기업 맞춤형 교육, 단체 교육 등에 대해 문의해주세요.</p>
                         </div>
-                         <form id="ict-form" class="space-y-5">
-                            <input type="hidden" name="inquiryType" value="ICT 교육 견적 문의">
+                         <form name="ict-inquiry" method="POST" data-netlify="true" class="space-y-5">
+                            <input type="hidden" name="form-name" value="ict-inquiry">
                             <input type="text" name="company" placeholder="회사/기관명" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500">
                             <input type="text" name="name" placeholder="담당자명" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500">
                             <input type="tel" name="phone" placeholder="연락처" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-sky-500">
@@ -172,7 +171,6 @@
                                 <label for="agree-ict" class="ml-2 block text-sm text-gray-900">개인정보 수집 및 이용에 동의합니다.</label>
                             </div>
                             <button type="submit" class="w-full bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition-colors">문의하기</button>
-                            <p id="ict-form-status" class="text-center mt-4"></p>
                         </form>
                     </div>
                 </div>
@@ -281,51 +279,6 @@
             };
             window.addEventListener('scroll', handleScrollAnimation);
             setTimeout(handleScrollAnimation, 100);
-
-            // --- Form Submission Logic ---
-            const handleFormSubmit = async (form, statusElement) => {
-                const formData = new FormData(form);
-                
-                statusElement.textContent = '전송 중...';
-                statusElement.classList.remove('text-red-500', 'text-green-500');
-
-                try {
-                    // 백엔드 서버 주소를 입력해주세요. 로컬에서 테스트 시 보통 http://localhost:3001 입니다.
-                    const response = await fetch('http://localhost:3001/api/quote', {
-                        method: 'POST',
-                        body: formData, // FormData는 자동으로 multipart/form-data 헤더를 설정합니다.
-                    });
-
-                    const resultText = await response.text();
-
-                    if (response.ok) {
-                        statusElement.textContent = resultText;
-                        statusElement.classList.add('text-green-500');
-                        form.reset();
-                    } else {
-                        statusElement.textContent = resultText;
-                        statusElement.classList.add('text-red-500');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    statusElement.textContent = '서버에 연결할 수 없습니다. 나중에 다시 시도해주세요.';
-                    statusElement.classList.add('text-red-500');
-                }
-            };
-
-            const rdForm = document.getElementById('rd-form');
-            const rdFormStatus = document.getElementById('rd-form-status');
-            rdForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                handleFormSubmit(rdForm, rdFormStatus);
-            });
-
-            const ictForm = document.getElementById('ict-form');
-            const ictFormStatus = document.getElementById('ict-form-status');
-            ictForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                handleFormSubmit(ictForm, ictFormStatus);
-            });
         });
     </script>
 
