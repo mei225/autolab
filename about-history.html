@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사업연혁 - AUTOLAB</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./favicon.png" type="image/png">
+
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (min-width: 1024px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                animation: fadeInDown 0.3s ease-out;
+            }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-700">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 left-0 right-0 z-50 border-b border-gray-200/80 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="./index.html" class="flex items-center space-x-2 shrink-0">
+                    <img src="./logo.png" alt="AUTOLAB Logo" class="h-8 md:h-10">
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="flex items-center">
+                    <nav class="hidden lg:flex items-center space-x-2">
+                        <div class="dropdown relative">
+                            <a href="./about-intro.html" class="px-4 py-2 text-lg font-bold text-sky-600 rounded-md">회사소개</a>
+                            <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40 border border-gray-100">
+                                <a href="./about-intro.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">AUTOLAB 소개</a>
+                                <a href="./about-history.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">사업연혁</a>
+                                <a href="./about-location.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">오시는길</a>
+                            </div>
+                        </div>
+                        <div class="dropdown relative">
+                            <a href="./business-sensor.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">사업분야</a>
+                            <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-48 border border-gray-100">
+                                <a href="./business-sensor.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">센서 개발 R&D</a>
+                                <a href="./business-ict.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">ICT 교육</a>
+                            </div>
+                        </div>
+                        <a href="./quote.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600">견적문의</a>
+                        <a href="./products.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600">제품소개</a>
+                        <div class="dropdown relative">
+                            <a href="./community-notice.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">커뮤니티</a>
+                            <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40 border border-gray-100">
+                                <a href="./community-notice.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">공지사항</a>
+                                <a href="./community-gallery.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">포토갤러리</a>
+                            </div>
+                        </div>
+                    </nav>
+                    <a href="#search-modal" class="hidden lg:block ml-4 p-3 text-gray-500 hover:text-sky-600"><i class="fas fa-search"></i></a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-sky-500 focus:outline-none p-2">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Hero Section -->
+        <section class="bg-gray-900 bg-cover bg-center" style="background-image: linear-gradient(rgba(29, 36, 48, 0.8), rgba(29, 36, 48, 0.8)), url('https://placehold.co/1920x600/1e293b/ffffff?text=AUTOLAB+History');">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-40 text-center text-white">
+                <h1 class="text-4xl md:text-5xl font-extrabold">사업연혁</h1>
+                <p class="mt-4 text-lg text-gray-300">AUTOLAB이 걸어온 혁신의 발자취입니다.</p>
+            </div>
+        </section>
+
+        <!-- Sub Navigation -->
+        <div class="border-b border-gray-200 sticky top-20 bg-white z-40">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex -mb-px">
+                    <a href="./about-intro.html" class="border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-4 text-center font-medium">AUTOLAB 소개</a>
+                    <a href="./about-history.html" class="border-b-2 border-sky-500 text-sky-600 py-4 px-1 text-center font-semibold">사업연혁</a>
+                    <a href="./about-location.html" class="border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-4 text-center font-medium">오시는길</a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <section id="history" class="py-20 lg:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto">
+                    <div class="text-center mb-20 scroll-reveal">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800">
+                            도전과 성장의 역사
+                        </h2>
+                        <p class="mt-4 text-lg text-gray-600">
+                            AUTOLAB은 더 나은 미래를 향한 끊임없는 도전으로 성장해왔습니다.
+                        </p>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="relative">
+                        <!-- Vertical Line -->
+                        <div class="border-l-2 border-sky-200 absolute h-full top-0 left-4"></div>
+                        
+                        <!-- Timeline Block -->
+                        <div class="mb-16 scroll-reveal">
+                            <div class="flex items-center mb-4">
+                                <div class="w-9 h-9 bg-sky-500 rounded-full flex-shrink-0 flex items-center justify-center z-10 shadow">
+                                   <span class="text-white font-bold text-lg">25</span>
+                                </div>
+                                <h3 class="pl-6 text-2xl font-bold text-gray-800">2025</h3>
+                            </div>
+                            <div class="ml-16 space-y-4 border-l-2 border-gray-200 pl-6 pb-4">
+                                <p><strong>AUTOLAB 설립:</strong> ICT 기술을 기반으로 미래 자동화 기술 연구 시작</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Block -->
+                        <div class="mb-16 scroll-reveal">
+                            <div class="flex items-center mb-4">
+                                <div class="w-9 h-9 bg-sky-500 rounded-full flex-shrink-0 flex items-center justify-center z-10 shadow">
+                                   <span class="text-white font-bold text-lg">26</span>
+                                </div>
+                                <h3 class="pl-6 text-2xl font-bold text-gray-800">2026 (예정)</h3>
+                            </div>
+                            <div class="ml-16 space-y-4 border-l-2 border-gray-200 pl-6 pb-4">
+                                <p><strong>스마트 센서 v1.0 출시:</strong> 고정밀 측정 기술 상용화</p>
+                                <p><strong>ICT 교육 프로그램 런칭:</strong> 실습 중심의 미래 인재 양성 시작</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Block -->
+                        <div class="scroll-reveal">
+                            <div class="flex items-center mb-4">
+                                <div class="w-9 h-9 bg-sky-500 rounded-full flex-shrink-0 flex items-center justify-center z-10 shadow">
+                                   <i class="fas fa-rocket text-white"></i>
+                                </div>
+                                <h3 class="pl-6 text-2xl font-bold text-gray-800">Our Next Step</h3>
+                            </div>
+                            <div class="ml-16 space-y-4 border-l-2 border-gray-200 pl-6 pb-4">
+                                <p>AUTOLAB은 현재에 안주하지 않고, AI 기반 자동화 솔루션과 글로벌 교육 네트워크 구축을 통해 더 큰 미래로 나아갈 것입니다.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid md:grid-cols-3 gap-10 text-center md:text-left">
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-bold mb-4">AUTOLAB</h3>
+                    <p class="text-gray-400 text-sm">엔진보다 뜨거운 창의력으로<br>미래 기술을 선도합니다.</p>
+                </div>
+                <div class="md:col-span-2 grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-base font-semibold mb-4 text-gray-200">Contact Us</h3>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li><i class="fas fa-phone-alt w-5 mr-1"></i> 010-0000-0000</li>
+                            <li><i class="fas fa-envelope w-5 mr-1"></i> contact@autolab.co.kr</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-semibold mb-4 text-gray-200">Information</h3>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li><i class="fas fa-map-marker-alt w-5 mr-1"></i> 경남 창원시 마산합포구 경남대학로 7</li>
+                            <li><i class="fas fa-building w-5 mr-1"></i> 사업자등록번호: 310-17-61940</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-500 text-xs">
+                <p>&copy; 2025 AUTOLAB. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuContainer = document.getElementById('mobile-menu');
+            const desktopNav = document.querySelector('header nav');
+
+            function buildMobileMenu() {
+                mobileMenuContainer.innerHTML = ''; 
+                const navItems = desktopNav.children;
+                for (const item of navItems) {
+                    if (item.classList.contains('dropdown')) {
+                        const wrapper = document.createElement('div');
+                        const parentLink = item.querySelector('a');
+                        const subMenu = item.querySelector('.dropdown-menu');
+                        const toggleButton = document.createElement('button');
+                        toggleButton.classList.add('w-full', 'flex', 'items-center', 'justify-between', 'px-4', 'py-3', 'text-lg', 'font-medium', 'text-left', 'text-gray-600', 'hover:bg-sky-50');
+                        toggleButton.innerHTML = `<span>${parentLink.textContent}</span><i class="fas fa-chevron-down transition-transform duration-200"></i>`;
+                        const mobileSubMenu = document.createElement('div');
+                        mobileSubMenu.classList.add('hidden', 'pl-4', 'bg-gray-50');
+                        subMenu.querySelectorAll('a').forEach(link => {
+                            const clonedLink = document.createElement('a');
+                            clonedLink.href = link.href;
+                            clonedLink.textContent = link.textContent;
+                            clonedLink.classList.add('block', 'w-full', 'px-4', 'py-3', 'text-gray-700', 'hover:bg-sky-100');
+                            mobileSubMenu.appendChild(clonedLink);
+                        });
+                        toggleButton.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            mobileSubMenu.classList.toggle('hidden');
+                            toggleButton.querySelector('i').classList.toggle('rotate-180');
+                        });
+                        wrapper.appendChild(toggleButton);
+                        wrapper.appendChild(mobileSubMenu);
+                        mobileMenuContainer.appendChild(wrapper);
+                    } else {
+                        const clonedLink = item.cloneNode(true);
+                        clonedLink.classList.add('block', 'w-full', 'px-4', 'py-3', 'text-lg', 'font-medium', 'text-gray-600', 'hover:bg-sky-50');
+                        clonedLink.classList.remove('rounded-md');
+                        mobileMenuContainer.appendChild(clonedLink);
+                    }
+                }
+                const searchLink = document.querySelector('a[href="#search-modal"]');
+                if(searchLink){
+                    const mobileSearchLink = document.createElement('a');
+                    mobileSearchLink.href = searchLink.href;
+                    mobileSearchLink.classList.add('block', 'w-full', 'px-4', 'py-3', 'text-lg', 'font-medium', 'text-gray-600', 'hover:bg-sky-50');
+                    mobileSearchLink.innerHTML = `<i class="fas fa-search mr-2"></i> 검색`;
+                    mobileMenuContainer.appendChild(mobileSearchLink);
+                }
+            }
+            buildMobileMenu();
+            mobileMenuButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileMenuContainer.classList.toggle('hidden');
+            });
+
+            // --- Scroll Reveal Animation ---
+            const scrollElements = document.querySelectorAll('.scroll-reveal');
+            const elementInView = (el) => el.getBoundingClientRect().top <= (window.innerHeight || document.documentElement.clientHeight) - 50;
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el)) {
+                        el.classList.add('visible');
+                    }
+                });
+            };
+            window.addEventListener('scroll', handleScrollAnimation);
+            // Run on load
+            setTimeout(handleScrollAnimation, 100);
+        });
+    </script>
+
+</body>
+</html>
