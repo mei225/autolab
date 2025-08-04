@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품소개 - AUTOLAB</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./favicon.png" type="image/png">
+
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (min-width: 1024px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                animation: fadeInDown 0.3s ease-out;
+            }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        /* Admin Edit Button Style */
+        .edit-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .group:hover .edit-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-700">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 left-0 right-0 z-50 border-b border-gray-200/80 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="./index.html" class="flex items-center space-x-2 shrink-0">
+                    <img src="./logo.png" alt="AUTOLAB Logo" class="h-8 md:h-10">
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="flex items-center">
+                    <nav class="hidden lg:flex items-center space-x-2">
+                        <div class="dropdown relative">
+                            <a href="./about-intro.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">회사소개</a>
+                            <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40 border border-gray-100">
+                                <a href="./about-intro.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">AUTOLAB 소개</a>
+                                <a href="./about-history.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">사업연혁</a>
+                                <a href="./about-location.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">오시는길</a>
+                            </div>
+                        </div>
+                        <div class="dropdown relative">
+                            <a href="./business-sensor.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">사업분야</a>
+                            <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-48 border border-gray-100">
+                                <a href="./business-sensor.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">센서 개발 R&D</a>
+                                <a href="./business-ict.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">ICT 교육</a>
+                            </div>
+                        </div>
+                        <a href="./quote.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600">견적문의</a>
+                        <a href="./products.html" class="px-4 py-2 text-lg font-bold text-sky-600">제품소개</a>
+                        <div class="dropdown relative">
+                            <a href="./community-notice.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">커뮤니티</a>
+                            <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40 border border-gray-100">
+                                <a href="./community-notice.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">공지사항</a>
+                                <a href="./community-gallery.html" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">포토갤러리</a>
+                            </div>
+                        </div>
+                    </nav>
+                    <a href="#search-modal" class="hidden lg:block ml-4 p-3 text-gray-500 hover:text-sky-600"><i class="fas fa-search"></i></a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-sky-500 focus:outline-none p-2">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200"></div>
+    </header>
+
+    <!-- Admin Panel (Initially Hidden) 
