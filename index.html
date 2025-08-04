@@ -3,798 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autolab - Innovative Automotive Solutions</title>
+    <title>AUTOLAB - 미래를 향한 기술 혁신</title>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
+    <!-- Google Fonts: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon (Dolphin) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐬</text></svg>">
+
     <style>
-        body { font-family: 'Noto Sans KR', sans-serif; scroll-behavior: smooth; }
-        .bg-navy { background-color: #1E3A8A; }
-        .text-navy { color: #1E3A8A; }
-        .border-navy { border-color: #1E3A8A; }
-        .hover\:bg-navy-dark:hover { background-color: #1C317A; }
-
-        .dropdown:hover .dropdown-menu, .dropdown.open .dropdown-menu { display: block; }
-        
-        .hero-controls { position: absolute; bottom: 2rem; right: 2rem; z-index: 10; display: flex; gap: 0.5rem; }
-        .hero-controls button { background-color: rgba(0,0,0,0.5); color: white; border-radius: 9999px; width: 2.5rem; height: 2.5rem; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s; }
-        .hero-controls button:hover { background-color: rgba(0,0,0,0.8); }
-
-        .swiper-slide .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1; }
-        .swiper-slide .slide-content { position: relative; z-index: 2; }
-        .swiper-slide video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 0; }
-        .swiper-pagination-bullet-active { background-color: #fff !important; }
-
-        .section-title { @apply text-3xl font-bold text-center; }
-        
-        .timeline-item { border-left: 3px solid #1E3A8A; }
-        
-        .cart-badge { @apply absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center; }
-        
-        .modal-backdrop { @apply fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center; }
-        .modal-content { @apply bg-white rounded-lg shadow-xl p-6 w-full max-w-lg; }
-
-        #back-to-top { @apply fixed bottom-10 right-10 bg-navy text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-opacity opacity-0 invisible; }
-        #back-to-top.visible { @apply opacity-100 visible; }
-
-        .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
-        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        /* Custom Styles */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Scroll Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Dropdown hover for desktop */
+        @media (min-width: 1024px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                animation: fadeInDown 0.3s ease-out;
+            }
+        }
+        /* Dropdown Animation */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Hero Section Text Animation */
+        .hero-text {
+            animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        }
+        @keyframes text-focus-in {
+            0% { filter: blur(12px); opacity: 0; }
+            100% { filter: blur(0px); opacity: 1; }
+        }
+        /* Parallax-like effect for Mission Section */
+        .mission-bg {
+            background-attachment: fixed;
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-white text-gray-700">
 
-    <!-- Header & Navigation -->
-    <header class="bg-white shadow-md sticky top-0 z-40">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-3xl font-bold text-navy nav-link">Autolab</a>
-            <div class="hidden md:flex items-center space-x-6">
-                <!-- 메뉴 -->
-                <div class="dropdown relative"><button class="font-semibold text-gray-700 hover:text-navy transition-colors nav-button" data-target="#about-intro">회사소개</button><div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40"><a href="#about-intro" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">오토랩소개</a><a href="#about-history" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">사업연혁</a><a href="#about-location" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">오시는 길</a></div></div>
-                <div class="dropdown relative"><button class="font-semibold text-gray-700 hover:text-navy transition-colors nav-button" data-target="#product-purchase">제품소개</button><div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40"><a href="#product-rd" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">R&D교육</a><a href="#product-auto" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">자동차교육</a><a href="#product-purchase" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">제품구입</a></div></div>
-                <a href="#quote" class="font-semibold text-gray-700 hover:text-navy transition-colors nav-link">견적 및 제휴문의</a>
-                <div class="dropdown relative"><button class="font-semibold text-gray-700 hover:text-navy transition-colors nav-button" data-target="#community-notices">커뮤니티</button><div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40"><a href="#community-notices" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">공지사항</a><a href="#community-gallery" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">포토 갤러리</a><a href="#community-youtube" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 nav-link">유튜브 채널</a></div></div>
-                <!-- 아이콘 -->
-                <div id="user-menu" class="flex items-center space-x-4 border-l pl-6">
-                    <!-- 로그인 상태에 따라 동적으로 변경됩니다 -->
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 border-b border-gray-200/80 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="./index.html" class="flex items-center space-x-2 shrink-0">
+                    <!-- 로고 이미지를 넣어주세요. (권장 높이: 40px) -->
+                    <img src="https://placehold.co/150x40/000000/FFFFFF?text=AUTOLAB" alt="AUTOLAB Logo" class="h-8 md:h-10">
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="flex items-center">
+                    <nav class="hidden lg:flex items-center space-x-2">
+                        <div class="dropdown relative">
+                            <a href="./about.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">회사소개</a>
+                            <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40 border border-gray-100">
+                                <a href="./about.html#intro" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">오토랩 소개</a>
+                                <a href="./about.html#history" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">사업연혁</a>
+                                <a href="./about.html#location" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">오시는길</a>
+                            </div>
+                        </div>
+                        <div class="dropdown relative">
+                            <a href="./business.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">사업분야</a>
+                            <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-48 border border-gray-100">
+                                <a href="./business.html#sensor" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">센서 개발 R&D</a>
+                                <a href="./business.html#ict" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">ICT 교육</a>
+                            </div>
+                        </div>
+                        <a href="./quote.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600">견적문의</a>
+                        <a href="./products.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600">제품소개</a>
+                        <div class="dropdown relative">
+                            <a href="./community.html" class="px-4 py-2 text-lg font-medium text-gray-600 hover:text-sky-600 rounded-md">커뮤니티</a>
+                            <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-40 border border-gray-100">
+                                <a href="./community.html#notice" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">공지사항</a>
+                                <a href="./community.html#gallery" class="block px-4 py-2 text-gray-700 hover:bg-sky-50 hover:text-sky-600">포토갤러리</a>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- Search Button -->
+                    <a href="#search-modal" class="hidden lg:block ml-4 p-3 text-gray-500 hover:text-sky-600"><i class="fas fa-search"></i></a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-sky-500 focus:outline-none p-2">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
                 </div>
             </div>
-            <div class="md:hidden"><button id="mobile-menu-button" class="text-gray-800 focus:outline-none"><i class="fa-solid fa-bars text-xl"></i></button></div>
-        </nav>
-        <div id="mobile-menu" class="md:hidden hidden bg-white border-t"></div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200">
+            <!-- Mobile menu links will be populated by JS -->
+        </div>
     </header>
 
+    <!-- Main Content -->
     <main>
-        <!-- Home Section (Hero Slider) -->
-        <section id="home" class="h-screen w-full main-content relative">
-            <div class="swiper h-full">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide flex items-center justify-center text-white text-center"><div class="overlay"></div><video src="https://videos.pexels.com/video-files/8044879/8044879-hd_1920_1080_25fps.mp4" autoplay loop muted playsinline></video><div class="slide-content container mx-auto px-6"><h1 class="text-4xl md:text-6xl font-bold mb-4">미래를 주도하는 기술, Autolab</h1><p class="text-lg md:text-xl max-w-3xl mx-auto">혁신적인 센서 기술과 체계적인 교육으로 자동차 산업의 내일을 만들어갑니다.</p></div></div>
-                    <div class="swiper-slide flex items-center justify-center text-white text-center"><div class="overlay"></div><video src="https://videos.pexels.com/video-files/5944249/5944249-hd_1920_1080_24fps.mp4" autoplay loop muted playsinline></video><div class="slide-content container mx-auto px-6"><h1 class="text-4xl md:text-6xl font-bold mb-4">함께 성장하는 R&D 파트너</h1><p class="text-lg md:text-xl max-w-3xl mx-auto">실무 중심의 교육 프로그램을 통해 최고의 전문가를 양성합니다.</p></div></div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-            <div class="hero-controls">
-                <button id="play-pause-button"><i class="fa-solid fa-pause"></i></button>
+        <!-- Section 1: Hero -->
+        <section id="home" class="h-screen flex items-center justify-center bg-cover bg-center bg-gray-800" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placehold.co/1920x1080/1e293b/ffffff?text=Dynamic+Technology+Video');">
+            <div class="text-center text-white px-4 hero-text">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">미래를 향한 끝없는 탐구,<br>기술의 한계를 넘어서다.</h1>
+                <p class="mt-6 text-lg md:text-xl opacity-80">AUTOLAB은 혁신적인 기술로 내일의 가능성을 현실로 만듭니다.</p>
             </div>
         </section>
 
-        <!-- Community Preview Section -->
-        <section id="community-preview" class="py-20 bg-white main-content">
-            <div class="container mx-auto px-6"><div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="animate-on-scroll"><div class="bg-gray-50 p-6 rounded-lg shadow-sm h-full"><h3 class="text-xl font-bold text-navy mb-4">공지사항</h3><ul id="main-notice-list" class="space-y-3"></ul></div></div>
-                <div class="animate-on-scroll" style="transition-delay: 100ms;"><div class="bg-gray-50 p-6 rounded-lg shadow-sm h-full"><h3 class="text-xl font-bold text-navy mb-4">포토 갤러리</h3><div id="main-gallery-list" class="space-y-4"></div></div></div>
-                <div class="animate-on-scroll" style="transition-delay: 200ms;"><div class="bg-gray-50 p-6 rounded-lg shadow-sm h-full"><h3 class="text-xl font-bold text-navy mb-4">유튜브 채널</h3><div id="main-youtube-list" class="space-y-4"></div></div></div>
-            </div></div>
+        <!-- Section 2: Mission -->
+        <section id="mission" class="relative py-24 lg:py-48 bg-cover bg-center mission-bg" style="background-image: linear-gradient(rgba(248, 250, 252, 0.9), rgba(248, 250, 252, 0.9)), url('https://placehold.co/1920x1080/e0f2fe/38bdf8?text=Abstract+Pattern');">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-reveal">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-gray-800 leading-snug">
+                    우리는 <span class="text-sky-500">창의적인 아이디어</span>로<br>
+                    세상을 움직이는 <span class="text-sky-500">새로운 방법</span>을 제시합니다.
+                </h2>
+                <p class="mt-8 max-w-2xl mx-auto text-lg text-gray-600">
+                    자동차(Auto)와 실험실(Lab)의 결합. AUTOLAB은 끝없는 연구와 실험 정신을 바탕으로, ICT 기술의 경계를 허무는 자동화 기술과 교육 솔루션을 제공합니다.
+                </p>
+                <div class="mt-12">
+                    <a href="./about.html" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        회사소개 더 알아보기
+                    </a>
+                </div>
+            </div>
         </section>
-        
-        <!-- 상세 페이지 섹션 컨테이너 -->
-        <div id="page-content-wrapper">
-            <!-- 회사소개 -->
-            <section data-page-group="about" id="about-intro" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><div class="max-w-4xl mx-auto text-center animate-on-scroll"><h1 class="text-4xl font-bold text-navy mb-12 section-title">오토랩소개</h1><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-lg mx-auto mb-8"><p class="text-lg leading-relaxed">Autolab은 기존의 틀을 깨는 혁신적인 센서 플랫폼을 개발하고, 세상에 없던 새로운 센서를 연구합니다.<br>저희는 실습 기반 학습을 통해 학생들이 능동적으로 지식을 습득하고 문제를 해결하는 능력을 기를 수 있도록 지원합니다.<br>이는 기존 자동차 교육에 없었던 새로운 시도이며, Autolab의 핵심적인 교육 철학입니다.</p></div></div></div></section>
-            <section data-page-group="about" id="about-history" class="page-section hidden"><div class="py-20 bg-white"><div class="container mx-auto px-6"><div class="max-w-2xl mx-auto animate-on-scroll"><h1 class="text-4xl font-bold text-navy mb-12 section-title">사업연혁</h1><div class="relative"><div class="timeline-item pl-8 pb-8"><p class="font-bold text-navy">2025. 07</p><p>Autolab 홈페이지 리뉴얼</p></div><div class="timeline-item pl-8 pb-8"><p class="font-bold text-navy">2024. 11</p><p>현대자동차그룹 산학협력 체결</p></div><div class="timeline-item pl-8 pb-8"><p class="font-bold text-navy">2024. 05</p><p>스마트 모빌리티 경진대회 대상 수상</p></div><div class="timeline-item pl-8 pb-8"><p class="font-bold text-navy">2023. 03</p><p>Autolab 연구소 설립</p></div></div></div></div></div></section>
-            <section data-page-group="about" id="about-location" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><div class="grid md:grid-cols-2 gap-8 items-center animate-on-scroll"><div class="h-96"><h1 class="text-4xl font-bold text-navy mb-12 section-title md:hidden">오시는 길</h1><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3264.331899142857!2d128.5482356763493!3d35.19864245649987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x356f32841440253d%3A0x1f234fe91b32d18c!2z6rK964Ko64yA7ZWZ6rWQ!5e0!3m2!1sko!2skr!4v1720661704604!5m2!1sko!2skr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-lg shadow-md"></iframe></div><div class="text-center md:text-left"><h1 class="text-4xl font-bold text-navy mb-12 section-title hidden md:block">오시는 길</h1><p class="font-bold text-lg">주소</p><p class="mb-4">경상남도 창원시 마산합포구 경남대학로 7, 1공학관 4층</p><p class="font-bold text-lg">연락처</p><p class="mb-4">T. 055-123-4567 / F. 055-123-4568</p><p class="font-bold text-lg">이메일</p><p>contact@autolab.co.kr</p></div></div></div></div></section>
-            
-            <!-- 제품소개 -->
-            <section data-page-group="product" id="product-rd" class="page-section hidden"><div class="py-20 bg-white"><div class="container mx-auto px-6"><div class="grid md:grid-cols-2 gap-8 items-center animate-on-scroll"><div class="pr-8"><h1 class="text-4xl font-bold text-navy mb-4 section-title">R&D교육</h1><p class="leading-relaxed">Autolab의 R&D 교육은 단순한 이론 학습을 넘어, 실제 산업 현장에서 마주할 문제들을 직접 해결하는 프로젝트 기반으로 진행됩니다. 학생들은 최신 센서 기술을 활용하여 자신만의 아이디어를 구체화하고, 시제품을 제작하며 실전 경험을 쌓습니다.</p></div><div><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-lg"></div></div></div></div></section>
-            <section data-page-group="product" id="product-auto" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><div class="grid md:grid-cols-2 gap-8 items-center animate-on-scroll"><div class="order-2 md:order-1"><img src="https://images.unsplash.com/photo-1617855023909-b003c4ea2402?q=80&w=2070&auto=format&fit=crop" class="rounded-lg shadow-lg"></div><div class="order-1 md:order-2 pl-8"><h1 class="text-4xl font-bold text-navy mb-4 section-title">자동차교육</h1><p class="leading-relaxed">자율주행, 전기차, 커넥티드카 등 급변하는 자동차 산업의 트렌드에 맞춰 특화된 교육 과정을 제공합니다. CAN 통신, LiDAR/Radar 센서 데이터 처리, 임베디드 시스템 설계 등 핵심 기술을 깊이 있게 다루어 차세대 자동차 전문가를 양성합니다.</p></div></div></div></div></section>
-            <section data-page-group="product" id="product-purchase" class="page-section hidden"><div class="py-20 bg-white"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-4 section-title">제품구입</h1><p class="text-center mt-4 text-gray-600">Autolab에서 자체 개발한 교육용 키트 및 센서 모듈입니다.</p><div id="product-list" class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8"></div></div></div></section>
-            
-            <!-- 견적 및 제휴문의 -->
-            <section id="quote" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg animate-on-scroll"><h1 class="text-4xl font-bold text-navy mb-12 section-title">견적 및 제휴문의</h1><form><div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"><input type="text" placeholder="이름" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-navy"><input type="text" placeholder="회사명" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-navy"></div><div class="mb-6"><input type="email" placeholder="이메일" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-navy"></div><div class="mb-6"><textarea placeholder="문의 내용" rows="5" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-navy"></textarea></div><button type="submit" class="w-full bg-navy hover:bg-navy-dark text-white font-bold py-3 px-4 rounded-lg transition-colors">문의하기</button></form></div></div></div></section>
-            
-            <!-- 커뮤니티 -->
-            <section data-page-group="community" id="community-notices" class="page-section hidden"><div class="py-20 bg-white"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">공지사항</h1><div id="notice-list" class="max-w-4xl mx-auto animate-on-scroll"></div></div></div></section>
-            <section data-page-group="community" id="community-notice-detail" class="page-section hidden"><div class="py-20 bg-white"><div class="container mx-auto px-6"><div class="max-w-4xl mx-auto animate-on-scroll bg-white p-8 rounded-lg shadow-md"><h2 id="notice-detail-title" class="text-2xl font-bold mb-2"></h2><p id="notice-detail-date" class="text-sm text-gray-500 mb-6"></p><div id="notice-detail-content" class="prose max-w-none"></div><hr class="my-8"><button class="nav-link bg-gray-200 hover:bg-gray-300 px-6 py-2 rounded-md" data-target="#community-notices">목록으로</button></div></div></div></section>
-            <section data-page-group="community" id="community-gallery" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">포토 갤러리</h1><div id="gallery-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div></div></div></section>
-            <section data-page-group="community" id="community-youtube" class="page-section hidden"><div class="py-20 bg-white"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">유튜브 채널</h1><div id="youtube-list" class="grid md:grid-cols-2 gap-8"></div></div></div></section>
 
-            <!-- 로그인/회원가입 페이지 -->
-            <section id="login-page" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg animate-on-scroll">
-                <!-- 로그인 폼 -->
-                <form id="login-form">
-                    <h1 class="text-4xl font-bold text-navy mb-12 section-title">로그인</h1>
-                    <div class="mb-4"><label for="login-email" class="block text-sm font-medium text-gray-700">이메일</label><input type="email" id="login-email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div>
-                    <div class="mb-6"><label for="login-password" class="block text-sm font-medium text-gray-700">비밀번호</label><input type="password" id="login-password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div>
-                    <button type="submit" class="w-full bg-navy hover:bg-navy-dark text-white font-bold py-2 px-4 rounded-lg transition-colors">로그인</button>
-                    <p class="text-center text-sm mt-4">아직 회원이 아니신가요? <button type="button" id="show-signup-btn" class="font-semibold text-navy hover:underline">회원가입</button></p>
-                </form>
-                <!-- 회원가입 폼 -->
-                <form id="signup-form" class="hidden">
-                    <h1 class="text-4xl font-bold text-navy mb-12 section-title">회원가입</h1>
-                    <div class="mb-4"><label for="signup-email" class="block text-sm font-medium text-gray-700">이메일</label><input type="email" id="signup-email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div>
-                    <div class="mb-4"><label for="signup-password" class="block text-sm font-medium text-gray-700">비밀번호</label><input type="password" id="signup-password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div>
-                    <div class="mb-6"><label for="signup-password-confirm" class="block text-sm font-medium text-gray-700">비밀번호 확인</label><input type="password" id="signup-password-confirm" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-navy focus:border-navy" required></div>
-                    <button type="submit" class="w-full bg-navy hover:bg-navy-dark text-white font-bold py-2 px-4 rounded-lg transition-colors">회원가입</button>
-                    <p class="text-center text-sm mt-4">이미 회원이신가요? <button type="button" id="show-login-btn" class="font-semibold text-navy hover:underline">로그인</button></p>
-                </form>
-            </div></div></div></section>
+        <!-- Section 3: Technology -->
+        <section class="bg-white">
+            <div class="grid lg:grid-cols-2">
+                <div class="relative p-12 lg:p-24 flex items-center bg-gray-900 text-white scroll-reveal">
+                    <div>
+                        <h3 class="text-3xl lg:text-4xl font-bold mb-4">센서 개발 R&D</h3>
+                        <p class="text-lg text-gray-300 mb-6">초정밀 센서부터 AI 기반 인식 시스템까지, 산업의 미래를 여는 핵심 기술을 연구하고 개발합니다.</p>
+                        <a href="./business.html#sensor" class="font-semibold text-sky-400 hover:text-white">자세히 보기 &rarr;</a>
+                    </div>
+                </div>
+                <div class="h-80 lg:h-auto bg-cover bg-center" style="background-image: url('https://placehold.co/800x800/0f172a/ffffff?text=Sensor+Tech');"></div>
+            </div>
+             <div class="grid lg:grid-cols-2">
+                <div class="h-80 lg:h-auto bg-cover bg-center lg:order-2" style="background-image: url('https://placehold.co/800x800/e0f2fe/38bdf8?text=ICT+Education');"></div>
+                <div class="relative p-12 lg:p-24 flex items-center bg-gray-50 scroll-reveal lg:order-1">
+                     <div>
+                        <h3 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">ICT 교육</h3>
+                        <p class="text-lg text-gray-600 mb-6">이론을 넘어 실제적인 문제 해결 능력을 키우는 실습 중심의 교육 프로그램을 통해 미래 인재를 양성합니다.</p>
+                        <a href="./business.html#ict" class="font-semibold text-sky-600 hover:text-sky-700">자세히 보기 &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <!-- 장바구니 페이지 -->
-            <section id="cart-page" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">장바구니</h1><div id="cart-items-container" class="mt-12 max-w-4xl mx-auto animate-on-scroll"></div></div></div></section>
+        <!-- Section 4: Products -->
+        <section class="py-20 lg:py-32 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 scroll-reveal">
+                    <h2 class="text-4xl font-extrabold text-gray-900">Products</h2>
+                    <p class="mt-4 text-lg text-gray-600">AUTOLAB의 기술력으로 탄생한 혁신적인 제품들을 만나보세요.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product Item 1 -->
+                    <div class="bg-gray-50 rounded-lg overflow-hidden group scroll-reveal border border-gray-200 hover:shadow-xl hover:border-sky-300 transition-all duration-300">
+                        <img src="https://placehold.co/600x400/e2e8f0/334155?text=Smart+Sensor" alt="Product 1" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">스마트 센서 v1.0</h3>
+                            <p class="text-gray-600">고정밀 측정이 가능한 차세대 스마트 센서</p>
+                        </div>
+                    </div>
+                    <!-- Product Item 2 -->
+                     <div class="bg-gray-50 rounded-lg overflow-hidden group scroll-reveal border border-gray-200 hover:shadow-xl hover:border-sky-300 transition-all duration-300" style="transition-delay: 150ms;">
+                        <img src="https://placehold.co/600x400/e2e8f0/334155?text=Education+Kit" alt="Product 2" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">ICT 교육용 키트</h3>
+                            <p class="text-gray-600">실습 위주의 코딩 및 하드웨어 제어 교육 키트</p>
+                        </div>
+                    </div>
+                    <!-- Product Item 3 -->
+                     <div class="bg-gray-50 rounded-lg overflow-hidden group scroll-reveal border border-gray-200 hover:shadow-xl hover:border-sky-300 transition-all duration-300" style="transition-delay: 300ms;">
+                        <img src="https://placehold.co/600x400/e2e8f0/334155?text=Automation+Solution" alt="Product 3" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">자동화 솔루션</h3>
+                            <p class="text-gray-600">공정 자동화를 위한 맞춤형 소프트웨어 솔루션</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="text-center mt-16">
+                     <a href="./products.html" class="font-bold text-lg text-sky-600 hover:text-sky-700 group">
+                         <span>전체 제품 보기</span>
+                         <span class="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">&rarr;</span>
+                     </a>
+                </div>
+            </div>
+        </section>
 
-            <!-- 관리자 페이지 -->
-            <section id="admin-page" class="page-section hidden"><div class="py-20"><div class="container mx-auto px-6"><h1 class="text-4xl font-bold text-navy mb-12 section-title">관리자 페이지</h1><div class="bg-white p-8 rounded-lg shadow-md animate-on-scroll"><h3 class="text-xl font-bold text-navy mb-6">콘텐츠 관리</h3><div class="space-y-12">
-                <div>
-                    <h4 class="font-semibold text-lg mb-4 border-b pb-2">공지사항 관리</h4>
-                    <form id="add-notice-form" class="space-y-2 mb-4"><input id="new-notice-title" type="text" placeholder="새 공지사항 제목" class="w-full p-2 border rounded" required><textarea id="new-notice-content" placeholder="공지 내용 (HTML 태그 사용 가능)" class="w-full p-2 border rounded" rows="3" required></textarea><button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">새 공지 추가</button></form>
-                    <div class="overflow-x-auto"><table id="admin-notices-table" class="w-full text-left"><thead><tr class="border-b"><th class="p-2">제목</th><th class="p-2">날짜</th><th class="p-2">작업</th></tr></thead><tbody></tbody></table></div>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-lg mb-4 border-b pb-2">제품 관리</h4>
-                    <form id="add-product-form" class="space-y-2 mb-4"><input id="new-product-name" type="text" placeholder="새 제품명" class="w-full p-2 border rounded" required><input id="new-product-price" type="number" placeholder="가격" class="w-full p-2 border rounded" required><input id="new-product-desc" type="text" placeholder="제품 설명" class="w-full p-2 border rounded" required><input id="new-product-img" type="text" placeholder="이미지 URL" class="w-full p-2 border rounded" required><button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">새 제품 추가</button></form>
-                    <div class="overflow-x-auto"><table id="admin-products-table" class="w-full text-left"><thead><tr class="border-b"><th class="p-2">제품명</th><th class="p-2">가격</th><th class="p-2">작업</th></tr></thead><tbody></tbody></table></div>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-lg mb-4 border-b pb-2">포토 갤러리 관리</h4>
-                    <form id="add-gallery-form" class="space-y-2 mb-4"><input id="new-gallery-title" type="text" placeholder="사진 제목" class="w-full p-2 border rounded" required><input id="new-gallery-desc" type="text" placeholder="사진 설명" class="w-full p-2 border rounded" required><input id="new-gallery-img" type="text" placeholder="이미지 URL" class="w-full p-2 border rounded" required><button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">갤러리 추가</button></form>
-                </div>
-                 <div>
-                    <h4 class="font-semibold text-lg mb-4 border-b pb-2">유튜브 관리</h4>
-                    <form id="add-youtube-form" class="space-y-2 mb-4"><input id="new-youtube-title" type="text" placeholder="영상 제목" class="w-full p-2 border rounded" required><input id="new-youtube-desc" type="text" placeholder="영상 설명" class="w-full p-2 border rounded" required><input id="new-youtube-id" type="text" placeholder="유튜브 영상 ID (예: EngW7t_J_OQ)" class="w-full p-2 border rounded" required><button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">유튜브 추가</button></form>
-                </div>
-                 <div>
-                    <h4 class="font-semibold text-lg mb-4 border-b pb-2">회원 관리</h4>
-                    <div class="overflow-x-auto"><table id="admin-users-table" class="w-full text-left"><thead><tr class="border-b"><th class="p-2">이메일</th><th class="p-2">역할</th><th class="p-2">작업</th></tr></thead><tbody></tbody></table></div>
-                </div>
-            </div></div></div></div></section>
-        </div>
+        <!-- Other sections will be added here: Quote, Community, Location -->
+        <!-- ... -->
     </main>
-    
-    <!-- Add to Cart Modal -->
-    <div id="add-to-cart-modal" class="modal-backdrop hidden">
-        <div class="modal-content text-center">
-            <button id="close-cart-modal" class="absolute top-3 right-4 text-gray-500 hover:text-gray-800">&times;</button>
-            <i class="fa-solid fa-check-circle text-green-500 text-5xl mb-4"></i>
-            <h3 class="text-lg font-bold mb-2">상품이 장바구니에 담겼습니다.</h3>
-            <p id="added-product-name" class="text-sm text-gray-600 mb-6"></p>
-            <div class="flex gap-4">
-                <button class="modal-close-btn w-full bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">쇼핑 계속하기</button>
-                <button id="go-to-cart-btn" class="w-full bg-navy hover:bg-navy-dark text-white px-4 py-2 rounded-lg">장바구니 보기</button>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid md:grid-cols-3 gap-10 text-center md:text-left">
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-bold mb-4">AUTOLAB</h3>
+                    <p class="text-gray-400 text-sm">엔진보다 뜨거운 창의력으로<br>미래 기술을 선도합니다.</p>
+                </div>
+                <div class="md:col-span-2 grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-base font-semibold mb-4 text-gray-200">Contact Us</h3>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li><i class="fas fa-phone-alt w-5 mr-1"></i> 010-0000-0000</li>
+                            <li><i class="fas fa-envelope w-5 mr-1"></i> contact@autolab.co.kr</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-semibold mb-4 text-gray-200">Information</h3>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li><i class="fas fa-map-marker-alt w-5 mr-1"></i> 경남 창원시 마산합포구 경남대학로 7</li>
+                            <li><i class="fas fa-building w-5 mr-1"></i> 사업자등록번호: 310-17-61940</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-500 text-xs">
+                <p>&copy; 2025 AUTOLAB. All Rights Reserved.</p>
             </div>
         </div>
-    </div>
+    </footer>
+
+
+    <!-- Kakao Maps API Script will be here -->
     
-    <!-- Edit Modal -->
-    <div id="edit-modal" class="modal-backdrop hidden">
-        <div id="edit-modal-content" class="modal-content">
-            <!-- Edit form will be injected here -->
-        </div>
-    </div>
-    
-    <a href="#home" id="back-to-top"><i class="fa-solid fa-arrow-up"></i></a>
-
-    <footer class="bg-gray-800 text-white py-8"><div class="container mx-auto px-6 text-center"><p>&copy; 2025 Autolab. All Rights Reserved.</p><p class="text-sm text-gray-400 mt-2">본 사이트는 포트폴리오 목적으로 제작되었습니다.</p></div></footer>
-
-    <!-- Firebase SDK 추가 -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
-
-    <script>
-        // Firebase 설정 코드
-        const firebaseConfig = {
-            apiKey: "AIzaSyDtlIlzg-4PQDXJsDy7IhU0EEwlsG29E-c",
-            authDomain: "autolab-website.firebaseapp.com",
-            projectId: "autolab-website",
-            storageBucket: "autolab-website.appspot.com",
-            messagingSenderId: "777857058976",
-            appId: "1:777857058976:web:b431100cd07017dea4e1c5",
-            measurementId: "G-MKQYQLH91H"
-        };
-
-        // Firebase 앱 초기화
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        const storage = firebase.storage();
-    </script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // --- DATA ---
-            let products = [];
-            let notices = [];
-            let galleries = [];
-            let youtubes = [];
-            let users = [];
-            let cart = [];
-            let currentUserState = null; // null, 'member', 'admin'
-
-            // --- UI Elements ---
-            const userMenu = document.getElementById('user-menu');
-            const backToTopButton = document.getElementById('back-to-top');
-            const addToCartModal = document.getElementById('add-to-cart-modal');
-            const addedProductName = document.getElementById('added-product-name');
-            const editModal = document.getElementById('edit-modal');
-            const editModalContent = document.getElementById('edit-modal-content');
-
-            // --- Helper Functions ---
-            const showCartModal = (productName) => {
-                addedProductName.textContent = productName;
-                addToCartModal.classList.remove('hidden');
-            };
-            const closeCartModal = () => {
-                addToCartModal.classList.add('hidden');
-            };
-            document.querySelectorAll('.modal-close-btn, #close-cart-modal').forEach(btn => btn.addEventListener('click', closeCartModal));
-
-            // --- Rendering ---
-            function renderProducts() {
-                const container = document.getElementById('product-list');
-                if (!container) return;
-                container.innerHTML = '';
-                products.forEach((p, index) => {
-                    const el = document.createElement('div');
-                    el.className = 'bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow animate-on-scroll';
-                    el.style.transitionDelay = `${index * 100}ms`;
-                    el.innerHTML = `<img src="${p.img}" alt="${p.name}" class="w-full h-48 object-cover"><div class="p-4"><h3 class="font-bold text-lg">${p.name}</h3><p class="text-sm text-gray-600 h-10">${p.desc}</p><div class="flex justify-between items-center mt-4"><span class="font-bold text-navy text-xl">₩${p.price.toLocaleString()}</span><button data-product-id="${p.id}" class="add-to-cart-btn bg-navy text-white px-3 py-1 rounded-md text-sm hover:bg-navy-dark">담기</button></div></div>`;
-                    container.appendChild(el);
-                });
-            }
-            function renderNotices() {
-                const listContainer = document.getElementById('notice-list');
-                const mainContainer = document.getElementById('main-notice-list');
-                if (listContainer) {
-                    listContainer.innerHTML = `<div class="border-t">${notices.map(n => `<div class="border-b p-4 grid grid-cols-1 md:grid-cols-4 gap-4 hover:bg-gray-50"><span class="font-bold text-navy">공지</span><p class="md:col-span-2"><a href="#community-notice-detail" data-notice-id="${n.id}" class="nav-link hover:underline">${n.title}</a></p><span class="text-gray-500 text-right">${n.date}</span></div>`).join('')}</div>`;
-                }
-                if(mainContainer) {
-                    mainContainer.innerHTML = notices.slice(0, 3).map(n => `<li class="flex justify-between items-center text-sm"><a href="#community-notice-detail" data-notice-id="${n.id}" class="hover:underline truncate nav-link">${n.title}</a><span class="text-gray-500 flex-shrink-0 ml-4">${n.date}</span></li>`).join('');
-                }
-            }
-            function renderGalleries() {
-                const listContainer = document.getElementById('gallery-list');
-                const mainContainer = document.getElementById('main-gallery-list');
-                if (listContainer) {
-                    listContainer.innerHTML = '';
-                    galleries.forEach((g, index) => {
-                        const el = document.createElement('div');
-                        el.className = 'bg-white rounded-lg shadow-md overflow-hidden animate-on-scroll';
-                        el.style.transitionDelay = `${index * 100}ms`;
-                        el.innerHTML = `<img src="${g.img}" class="w-full h-56 object-cover"><div class="p-6"><h3 class="font-bold text-lg mb-2">${g.title}</h3><p class="text-gray-600 text-sm">${g.desc}</p></div>`;
-                        listContainer.appendChild(el);
-                    });
-                }
-                if(mainContainer) {
-                    mainContainer.innerHTML = galleries.slice(0, 3).map(g => `<div class="flex items-center space-x-4"><a href="#community-gallery" class="nav-link flex-shrink-0"><img src="${g.img}" class="w-20 h-20 rounded object-cover"></a><div><a href="#community-gallery" class="font-semibold hover:underline nav-link">${g.title}</a><p class="text-sm text-gray-600">${g.desc}</p></div></div>`).join('');
-                }
-            }
-            function renderYoutubes() {
-                const listContainer = document.getElementById('youtube-list');
-                const mainContainer = document.getElementById('main-youtube-list');
-
-                if (listContainer) {
-                    listContainer.innerHTML = '';
-                    youtubes.forEach((y, index) => {
-                        const el = document.createElement('div');
-                        el.className = 'bg-white rounded-lg shadow-md overflow-hidden animate-on-scroll';
-                        el.style.transitionDelay = `${index * 100}ms`;
-                        el.innerHTML = `<div class="aspect-w-16 aspect-h-9"><iframe src="https://www.youtube.com/embed/${y.videoId}" class="w-full h-full"></iframe></div><div class="p-6"><h3 class="font-bold text-lg mb-2">${y.title}</h3><p class="text-gray-600 text-sm">${y.desc}</p></div>`;
-                        listContainer.appendChild(el);
-                    });
-                }
-                if(mainContainer) {
-                    mainContainer.innerHTML = youtubes.slice(0, 2).map(y => `<div class="flex items-center space-x-4"><a href="#community-youtube" class="nav-link flex-shrink-0"><img src="https://img.youtube.com/vi/${y.videoId}/sddefault.jpg" class="w-20 h-20 rounded object-cover"></a><div><a href="#community-youtube" class="font-semibold hover:underline nav-link">${y.title}</a><p class="text-sm text-gray-600">${y.desc}</p></div></div>`).join('');
-                }
-            }
-            
-            // --- Admin Page ---
-            function renderAdminPage() {
-                const tableBodies = {
-                    notices: document.querySelector('#admin-notices-table tbody'),
-                    products: document.querySelector('#admin-products-table tbody'),
-                    users: document.querySelector('#admin-users-table tbody')
-                };
-                if (tableBodies.notices) {
-                    tableBodies.notices.innerHTML = '';
-                    notices.forEach(n => {
-                        const row = document.createElement('tr');
-                        row.className = 'border-b';
-                        row.innerHTML = `<td class="p-2">${n.title}</td><td class="p-2">${n.date}</td><td class="p-2"><button data-id="${n.id}" data-type="notice" class="edit-btn text-sm text-gray-600 hover:text-navy mr-2">수정</button><button data-id="${n.id}" data-type="notice" class="delete-btn text-sm text-red-600 hover:text-red-800">삭제</button></td>`;
-                        tableBodies.notices.appendChild(row);
-                    });
-                }
-                if (tableBodies.products) {
-                    tableBodies.products.innerHTML = '';
-                    products.forEach(p => {
-                        const row = document.createElement('tr');
-                        row.className = 'border-b';
-                        row.innerHTML = `<td class="p-2">${p.name}</td><td class="p-2">₩${p.price.toLocaleString()}</td><td class="p-2"><button data-id="${p.id}" data-type="product" class="edit-btn text-sm text-gray-600 hover:text-navy mr-2">수정</button><button data-id="${p.id}" data-type="product" class="delete-btn text-sm text-red-600 hover:text-red-800">삭제</button></td>`;
-                        tableBodies.products.appendChild(row);
-                    });
-                }
-                if (tableBodies.users) {
-                    tableBodies.users.innerHTML = '';
-                    users.forEach(u => {
-                        const row = document.createElement('tr');
-                        row.className = 'border-b';
-                        row.innerHTML = `<td class="p-2">${u.email}</td><td class="p-2">${u.role}</td><td class="p-2"><button class="text-sm text-red-600 hover:text-red-800">삭제</button></td>`;
-                        tableBodies.users.appendChild(row);
-                    });
-                }
-            }
-            
-            function showEditModal(type, id) {
-                const item = (type === 'notice' ? notices : products).find(i => i.id === id);
-                if (!item) return;
-                
-                let formHtml = '';
-                if (type === 'notice') {
-                    formHtml = `
-                        <h3 class="text-lg font-bold mb-4">공지사항 수정</h3>
-                        <form id="edit-form-actual">
-                            <input type="hidden" id="edit-id" value="${id}">
-                            <input type="hidden" id="edit-type" value="notice">
-                            <div class="mb-4"><label>제목</label><input id="edit-title" class="w-full p-2 border rounded" value="${item.title}"></div>
-                            <div class="mb-4"><label>내용</label><textarea id="edit-content" class="w-full p-2 border rounded" rows="5">${item.content}</textarea></div>
-                            <div class="flex justify-end gap-2"><button type="button" class="modal-close-btn bg-gray-200 px-4 py-2 rounded">취소</button><button type="submit" class="bg-navy text-white px-4 py-2 rounded">저장</button></div>
-                        </form>
-                    `;
-                } else { // product
-                     formHtml = `
-                        <h3 class="text-lg font-bold mb-4">제품 수정</h3>
-                        <form id="edit-form-actual">
-                            <input type="hidden" id="edit-id" value="${id}">
-                            <input type="hidden" id="edit-type" value="product">
-                            <div class="mb-4"><label>제품명</label><input id="edit-name" class="w-full p-2 border rounded" value="${item.name}"></div>
-                            <div class="mb-4"><label>가격</label><input id="edit-price" type="number" class="w-full p-2 border rounded" value="${item.price}"></div>
-                            <div class="mb-4"><label>설명</label><input id="edit-desc" class="w-full p-2 border rounded" value="${item.desc}"></div>
-                            <div class="mb-4"><label>이미지 URL</label><input id="edit-img" class="w-full p-2 border rounded" value="${item.img}"></div>
-                            <div class="flex justify-end gap-2"><button type="button" class="modal-close-btn bg-gray-200 px-4 py-2 rounded">취소</button><button type="submit" class="bg-navy text-white px-4 py-2 rounded">저장</button></div>
-                        </form>
-                    `;
-                }
-                editModalContent.innerHTML = formHtml;
-                editModal.classList.remove('hidden');
-                
-                document.getElementById('edit-form-actual').addEventListener('submit', handleEditFormSubmit);
-                editModal.querySelector('.modal-close-btn').addEventListener('click', () => editModal.classList.add('hidden'));
-            }
-            
-            function handleEditFormSubmit(e) {
-                e.preventDefault();
-                const id = document.getElementById('edit-id').value;
-                const type = document.getElementById('edit-type').value;
-                const collectionName = type === 'notice' ? 'notices' : 'products';
-                
-                let dataToUpdate = {};
-                if (type === 'notice') {
-                    dataToUpdate = {
-                        title: document.getElementById('edit-title').value,
-                        content: document.getElementById('edit-content').value
-                    };
-                } else {
-                    dataToUpdate = {
-                        name: document.getElementById('edit-name').value,
-                        price: Number(document.getElementById('edit-price').value),
-                        desc: document.getElementById('edit-desc').value,
-                        img: document.getElementById('edit-img').value
-                    };
-                }
-                
-                db.collection(collectionName).doc(id).update(dataToUpdate)
-                .then(() => {
-                    alert('수정되었습니다.');
-                    editModal.classList.add('hidden');
-                })
-                .catch(err => alert('수정 중 오류 발생: ' + err.message));
-            }
-
-
-            // --- Cart Logic ---
-            function addToCart(productId) {
-                const user = auth.currentUser;
-                if (!user) {
-                    alert("장바구니 기능은 로그인이 필요합니다.");
-                    showPage('#login-page');
-                    return;
-                }
-                const product = products.find(p => p.id === productId);
-                if (product) {
-                    const cartRef = db.collection('users').doc(user.uid).collection('cart').doc(productId);
-                    db.runTransaction((transaction) => {
-                        return transaction.get(cartRef).then((doc) => {
-                            let newQuantity = 1;
-                            if (doc.exists) {
-                                newQuantity = doc.data().quantity + 1;
-                            }
-                            transaction.set(cartRef, { ...product, quantity: newQuantity });
-                        });
-                    }).then(() => {
-                        showCartModal(product.name);
-                        fetchCart();
-                    });
-                }
-            }
-            function removeFromCart(productId) {
-                const user = auth.currentUser;
-                if (!user) return;
-                db.collection('users').doc(user.uid).collection('cart').doc(productId).delete().then(() => {
-                    fetchCart();
-                });
-            }
-            function updateCart() {
-                if(cartItemsPageContainer) {
-                    cartItemsPageContainer.innerHTML = '';
-                    if (cart.length === 0) {
-                        cartItemsPageContainer.innerHTML = '<div class="text-center bg-white p-10 rounded-lg shadow-md"><p class="text-gray-500 mb-4">장바구니가 비어있습니다.</p><button class="bg-navy text-white px-6 py-2 rounded-lg nav-link" data-target="#product-purchase">쇼핑 계속하기</button></div>';
-                    } else {
-                        const itemsHtml = cart.map((item) => `<div class="flex items-center justify-between py-4 border-b"><div class="flex items-center gap-4"><img src="${item.img}" class="w-16 h-16 rounded-md object-cover"><div><p class="font-semibold">${item.name}</p><p class="text-sm text-gray-600">수량: ${item.quantity}</p></div></div><div class="flex items-center gap-6"><p class="font-bold w-24 text-right">₩${(item.price * item.quantity).toLocaleString()}</p><button data-product-id="${item.id}" class="remove-from-cart-btn text-red-500 hover:text-red-700 text-sm"><i class="fa-solid fa-trash"></i></button></div></div>`).join('');
-                        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                        cartItemsPageContainer.innerHTML = `<div class="bg-white p-8 rounded-lg shadow-md">${itemsHtml}<div class="mt-6 pt-6 border-t"><div class="flex justify-end items-center gap-4"><span class="text-lg font-medium">총 합계:</span><span class="text-2xl font-bold text-navy">₩${total.toLocaleString()}</span></div><button class="w-full mt-6 bg-navy hover:bg-navy-dark text-white font-bold py-3 px-4 rounded-lg transition-colors">결제하기</button></div></div>`;
-                    }
-                }
-                updateLoginStatus();
-            }
-            
-            // --- Login Logic ---
-            function updateLoginStatus() {
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                const cartBadgeHtml = `<span id="cart-badge" class="cart-badge ${totalItems > 0 ? '' : 'hidden'}">${totalItems}</span>`;
-                if (currentUserState === 'admin') {
-                    userMenu.innerHTML = `<a href="#admin-page" class="font-semibold text-navy nav-link">관리자 페이지</a><button id="logout-button" class="text-gray-600 hover:text-navy">로그아웃</button>`;
-                } else if (currentUserState === 'member') {
-                     userMenu.innerHTML = `<span class="font-semibold">환영합니다!</span><a href="#cart-page" class="text-gray-600 hover:text-navy relative nav-link"><i class="fa-solid fa-cart-shopping text-xl"></i>${cartBadgeHtml}</a><button id="logout-button" class="text-gray-600 hover:text-navy">로그아웃</button>`;
-                } else {
-                    userMenu.innerHTML = `<a href="#login-page" class="text-gray-600 hover:text-navy nav-link"><i class="fa-solid fa-user text-xl"></i></a><a href="#cart-page" class="text-gray-600 hover:text-navy relative nav-link"><i class="fa-solid fa-cart-shopping text-xl"></i>${cartBadgeHtml}</a>`;
-                }
-            }
-
-            // --- Event Listeners ---
-            document.body.addEventListener('click', function(e) {
-                if (e.target.closest('.add-to-cart-btn')) { addToCart(e.target.closest('.add-to-cart-btn').dataset.productId); }
-                if (e.target.closest('.remove-from-cart-btn')) { removeFromCart(e.target.closest('.remove-from-cart-btn').dataset.productId); }
-                if (e.target.closest('.nav-link')) {
-                    e.preventDefault();
-                    const link = e.target.closest('.nav-link');
-                    const target = link.dataset.target || link.getAttribute('href');
-                    const noticeId = link.dataset.noticeId;
-                    
-                    if(noticeId) {
-                        showNoticeDetail(noticeId);
-                    } else {
-                        showPage(target);
-                    }
-                    
-                    document.querySelectorAll('.dropdown.open').forEach(dropdown => {
-                        dropdown.classList.remove('open');
-                    });
-                }
-                 if (e.target.closest('#logout-button')) {
-                    auth.signOut();
-                }
-                if (e.target.closest('.delete-btn')) {
-                    const btn = e.target.closest('.delete-btn');
-                    const id = btn.dataset.id;
-                    const type = btn.dataset.type;
-                    if (confirm('정말로 삭제하시겠습니까?')) {
-                        db.collection(type === 'notice' ? 'notices' : 'products').doc(id).delete()
-                        .then(() => alert('삭제되었습니다.'))
-                        .catch(err => alert('삭제 중 오류 발생: ' + err.message));
-                    }
-                }
-                if (e.target.closest('.edit-btn')) {
-                    const btn = e.target.closest('.edit-btn');
-                    const id = btn.dataset.id;
-                    const type = btn.dataset.type;
-                    showEditModal(type, id);
-                }
-            });
-            
-            document.getElementById('login-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
-                auth.signInWithEmailAndPassword(email, password)
-                    .then((userCredential) => {
-                        alert("로그인되었습니다.");
-                    })
-                    .catch((error) => alert("로그인 실패: " + error.message));
-            });
-            
-            document.getElementById('signup-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = document.getElementById('signup-email').value;
-                const password = document.getElementById('signup-password').value;
-                const passwordConfirm = document.getElementById('signup-password-confirm').value;
-                if (password !== passwordConfirm) {
-                    alert("비밀번호가 일치하지 않습니다.");
-                    return;
-                }
-                auth.createUserWithEmailAndPassword(email, password)
-                    .then((userCredential) => {
-                        return db.collection('users').doc(userCredential.user.uid).set({
-                            email: userCredential.user.email,
-                            role: 'member'
-                        });
-                    })
-                    .then(() => {
-                         alert("회원가입에 성공했습니다. 자동으로 로그인됩니다.");
-                    })
-                    .catch((error) => alert("회원가입 실패: " + error.message));
-            });
-
-            document.getElementById('go-to-cart-btn').addEventListener('click', () => {
-                closeCartModal();
-                showPage('#cart-page');
-            });
-            
-            const loginForm = document.getElementById('login-form');
-            const signupForm = document.getElementById('signup-form');
-            document.getElementById('show-signup-btn').addEventListener('click', () => {
-                loginForm.classList.add('hidden');
-                signupForm.classList.remove('hidden');
-            });
-            document.getElementById('show-login-btn').addEventListener('click', () => {
-                signupForm.classList.add('hidden');
-                loginForm.classList.remove('hidden');
-            });
-
-
-            // --- Slider Controls ---
-            const swiper = new Swiper('.swiper', { loop: true, autoplay: { delay: 5000, disableOnInteraction: false }, pagination: { el: '.swiper-pagination', clickable: true } });
-            const playPauseBtn = document.getElementById('play-pause-button');
-            playPauseBtn.addEventListener('click', () => {
-                if (swiper.autoplay.running) {
-                    swiper.autoplay.stop();
-                    playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-                } else {
-                    swiper.autoplay.start();
-                    playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                }
-            });
-
-            // --- Navigation Logic ---
-            const mainContent = document.querySelectorAll('.main-content');
-            const pageSections = document.querySelectorAll('.page-section');
-            const navButtons = document.querySelectorAll('.nav-button');
-
-            const showPage = (targetId) => {
-                window.scrollTo({ top: 0, behavior: 'auto' });
-                if (targetId === '#home') {
-                    pageSections.forEach(s => s.classList.add('hidden'));
-                    mainContent.forEach(s => s.classList.remove('hidden'));
-                } else {
-                    mainContent.forEach(s => s.classList.add('hidden'));
-                    pageSections.forEach(s => s.classList.add('hidden'));
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.classList.remove('hidden');
-                        if (targetId === '#cart-page') updateCart();
-                        if (targetId === '#admin-page') renderAdminPage();
-                        
-                        const elementsToAnimate = targetElement.querySelectorAll('.animate-on-scroll');
-                        elementsToAnimate.forEach(el => observer.observe(el));
-                    }
-                }
-                if (mobileMenu.classList.contains('hidden') === false) { mobileMenu.classList.add('hidden'); }
-            };
-
-            const showNoticeDetail = (noticeId) => {
-                const notice = notices.find(n => n.id === noticeId);
-                if(notice) {
-                    document.getElementById('notice-detail-title').textContent = notice.title;
-                    document.getElementById('notice-detail-date').textContent = notice.date;
-                    document.getElementById('notice-detail-content').innerHTML = notice.content;
-                    showPage('#community-notice-detail');
-                }
-            };
-            
-            navButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const dropdown = e.currentTarget.parentElement;
-                    const isOpen = dropdown.classList.contains('open');
-                    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
-                    if (!isOpen) {
-                        dropdown.classList.add('open');
-                    }
-                });
-            });
-            
-            window.addEventListener('click', function(e) {
-                if (!e.target.closest('.dropdown')) {
-                    document.querySelectorAll('.dropdown.open').forEach(dropdown => {
-                        dropdown.classList.remove('open');
-                    });
-                }
-            });
-
+            // Mobile Menu Logic
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            document.getElementById('mobile-menu-button').addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-            mobileMenu.innerHTML = document.querySelector('.hidden.md\\:flex.items-center.space-x-6').innerHTML;
+            const desktopNav = document.querySelector('header nav');
+            
+            if (desktopNav) {
+                mobileMenu.innerHTML = desktopNav.innerHTML;
+            }
 
-            // --- Back to Top Button ---
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 400) {
-                    backToTopButton.classList.add('visible');
+            mobileMenuButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Scroll Reveal Animation
+            const scrollElements = document.querySelectorAll('.scroll-reveal');
+            const elementInView = (el, dividend = 1) => {
+                const elementTop = el.getBoundingClientRect().top;
+                return (elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend);
+            };
+            const displayScrollElement = (element) => {
+                element.classList.add('visible');
+            };
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el, 1.1)) {
+                        displayScrollElement(el);
+                    }
+                });
+            };
+            window.addEventListener('scroll', handleScrollAnimation);
+            handleScrollAnimation();
+
+            // Header Style Change on Scroll
+            const header = document.getElementById('header');
+            window.onscroll = function() {
+                if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                    header.classList.add('h-16');
+                    header.classList.remove('h-20');
                 } else {
-                    backToTopButton.classList.remove('visible');
+                    header.classList.add('h-20');
+                    header.classList.remove('h-16');
                 }
-            });
-
-            // --- Scroll Animation ---
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
-            
-            // --- Firebase Auth State Listener ---
-            auth.onAuthStateChanged(user => {
-                const wasLoggedIn = !!currentUserState;
-                if (user) {
-                    const isAdmin = user.email === 'admin@autolab.com';
-                    currentUserState = isAdmin ? 'admin' : 'member';
-                    if (!wasLoggedIn) {
-                        showPage(isAdmin ? '#admin-page' : '#home');
-                    }
-                    fetchCart();
-                } else {
-                    if (wasLoggedIn) {
-                        showPage('#home');
-                    }
-                    currentUserState = null;
-                    cart = [];
-                    updateCart();
-                }
-                updateLoginStatus();
-            });
-
-            // --- Initial Data Fetch ---
-            async function fetchCart() {
-                const user = auth.currentUser;
-                if (!user) {
-                    cart = [];
-                    updateCart();
-                    return;
-                };
-                const querySnapshot = await db.collection('users').doc(user.uid).collection('cart').get();
-                cart = [];
-                querySnapshot.forEach(doc => {
-                    cart.push({ id: doc.id, ...doc.data() });
-                });
-                updateCart();
-            }
-
-            function fetchData() {
-                db.collection("products").onSnapshot((querySnapshot) => {
-                    products = [];
-                    querySnapshot.forEach((doc) => {
-                        products.push({ id: doc.id, ...doc.data() });
-                    });
-                    renderProducts();
-                    renderAdminPage();
-                });
-
-                db.collection("notices").orderBy("date", "desc").onSnapshot((querySnapshot) => {
-                    notices = [];
-                    querySnapshot.forEach((doc) => {
-                        notices.push({ id: doc.id, ...doc.data() });
-                    });
-                    renderNotices();
-                    renderAdminPage();
-                });
-                
-                db.collection("galleries").onSnapshot((querySnapshot) => {
-                    galleries = [];
-                    querySnapshot.forEach((doc) => {
-                        galleries.push({ id: doc.id, ...doc.data() });
-                    });
-                    renderGalleries();
-                });
-                
-                db.collection("youtubes").onSnapshot((querySnapshot) => {
-                    youtubes = [];
-                    querySnapshot.forEach((doc) => {
-                        youtubes.push({ id: doc.id, ...doc.data() });
-                    });
-                    renderYoutubes();
-                });
-
-                 db.collection("users").onSnapshot((querySnapshot) => {
-                    users = [];
-                    querySnapshot.forEach((doc) => {
-                        users.push({ id: doc.id, ...doc.data() });
-                    });
-                    renderAdminPage();
-                });
-            }
-            
-            // Admin form submissions
-            const addNoticeForm = document.getElementById('add-notice-form');
-            if(addNoticeForm) {
-                addNoticeForm.addEventListener('submit', e => {
-                    e.preventDefault();
-                    const title = document.getElementById('new-notice-title').value;
-                    const content = document.getElementById('new-notice-content').value;
-                    const date = new Date().toISOString().slice(0, 10);
-                    db.collection('notices').add({ title, content, date })
-                    .then(() => {
-                        alert('공지사항이 추가되었습니다.');
-                        addNoticeForm.reset();
-                    })
-                    .catch(err => alert('오류 발생: ' + err.message));
-                });
-            }
-            
-            const addProductForm = document.getElementById('add-product-form');
-            if(addProductForm) {
-                addProductForm.addEventListener('submit', e => {
-                    e.preventDefault();
-                    const name = document.getElementById('new-product-name').value;
-                    const price = Number(document.getElementById('new-product-price').value);
-                    const desc = document.getElementById('new-product-desc').value;
-                    const img = document.getElementById('new-product-img').value;
-                    db.collection('products').add({ name, price, desc, img })
-                    .then(() => {
-                        alert('제품이 추가되었습니다.');
-                        addProductForm.reset();
-                    })
-                    .catch(err => alert('오류 발생: ' + err.message));
-                });
-            }
-            
-            const addGalleryForm = document.getElementById('add-gallery-form');
-            if(addGalleryForm) {
-                addGalleryForm.addEventListener('submit', e => {
-                    e.preventDefault();
-                    const title = document.getElementById('new-gallery-title').value;
-                    const desc = document.getElementById('new-gallery-desc').value;
-                    const img = document.getElementById('new-gallery-img').value;
-                    db.collection('galleries').add({ title, desc, img })
-                    .then(() => {
-                        alert('갤러리 사진이 추가되었습니다.');
-                        addGalleryForm.reset();
-                    })
-                    .catch(err => alert('오류 발생: ' + err.message));
-                });
-            }
-            
-            const addYoutubeForm = document.getElementById('add-youtube-form');
-            if(addYoutubeForm) {
-                addYoutubeForm.addEventListener('submit', e => {
-                    e.preventDefault();
-                    const title = document.getElementById('new-youtube-title').value;
-                    const desc = document.getElementById('new-youtube-desc').value;
-                    const videoId = document.getElementById('new-youtube-id').value;
-                    db.collection('youtubes').add({ title, desc, videoId })
-                    .then(() => {
-                        alert('유튜브 영상이 추가되었습니다.');
-                        addYoutubeForm.reset();
-                    })
-                    .catch(err => alert('오류 발생: ' + err.message));
-                });
-            }
-
-            fetchData();
+            };
         });
     </script>
 
